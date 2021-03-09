@@ -16,12 +16,11 @@ body {
     background: var(--color-primary);
     color: var(--color-text);
     padding: 1em;
-    font-family: 'Segoe UI Light', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     font-size: 1rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Segoe UI', sans-serif;
     font-weight: bold;
 }
 
@@ -29,4 +28,9 @@ canvas {
     margin: 1em 0;
     border: solid 1px black;
     background: var(--color-text);
+}
+
+input, button {
+    padding: .2rem .4rem;
+    margin: 1em 0;
 }
