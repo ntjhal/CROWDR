@@ -13,28 +13,56 @@
 </head>
 <body>
     <h1>CROWDR</h1>
-    <p>It's fantastic</p>
+    <div id="modebar">
+        <button id="createmode">Creëren</button>
+        <button id="simulatemode">Simuleren</button>
+    </div>
 
-    <canvas></canvas>
+    <div id="main" class="flex">
+        <div>
+            <div id="gridFormHolder">
+
+            </div>
+            <div id="dragElementsHolder">
+
+            </div>
+        </div>
+        <div>
+            <div id="terrainInfoHolder">
+                <div id="weather">
+                    <h2>Weather</h2>
+            
+                    <input type="text">
+                    <button type="button">Toon</button>
+            
+                    <p id="city"></p>
+                    <p id="temp"></p>
+                </div>
+            </div>
+            <div class="canvasHolder">
+                <canvas>
+
+                </canvas>
+            </div>
+        </div>
+        <div>
+            <div id="settingsPanelHolder">
+
+            </div>
+
+            <div id="visitor">
+                <h2>Visitor</h2>
+        
+                <button type="button">Toon nieuwe</button>
+        
+                <p id="name"></p>
+                <p id="gender"></p>
+                <p id="city"></p>
+            </div>
+        </div>
+    </div>
+
+
     
-    <div id="weather">
-        <h2>Weather</h2>
-
-        <input type="text">
-        <button type="button">Toon</button>
-
-        <p id="city"></p>
-        <p id="temp"></p>
-    </div>
-
-    <div id="visitor">
-        <h2>Visitor</h2>
-
-        <button type="button">Toon nieuwe</button>
-
-        <p id="name"></p>
-        <p id="gender"></p>
-        <p id="city"></p>
-    </div>
 </body>
 </html>

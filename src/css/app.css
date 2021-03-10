@@ -34,3 +34,9 @@ input, button {
     padding: .2rem .4rem;
     margin: 1em 0;
 }
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
