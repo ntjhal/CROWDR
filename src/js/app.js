@@ -1,6 +1,8 @@
 import { WeatherController } from './controllers/weatherController.js';
 import { WeatherView } from './views/weatherView.js';
 import { WeatherModel } from './models/weatherModel.js';
+import { VisitorController } from './controllers/visitorController.js';
+import { VisitorView } from './views/visitorView.js';
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -25,8 +27,20 @@ const wv = new WeatherView(weatherDiv);
 const wc = new WeatherController(wv, wm);
 
 const input = weatherDiv.querySelector('input');
-const btn = weatherDiv.querySelector('button')
+const weatherBtn = weatherDiv.querySelector('button')
 
-btn.addEventListener('click', (e) => {
+weatherBtn.addEventListener('click', (e) => {
     wc.getWeather(input.value);
+});
+
+//Display a visitor
+const visitorDiv = document.querySelector('#visitor');
+
+const vv = new VisitorView(visitorDiv);
+const vc = new VisitorController(vv);
+
+const visitorBtn = visitorDiv.querySelector('button')
+
+visitorBtn.addEventListener('click', (e) => {
+    vc.generateVisitor();
 });
