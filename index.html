@@ -18,8 +18,8 @@
         <button id="simulatemode">Simuleren</button>
     </div>
 
-    <div id="main" class="flex">
-        <div>
+    <div id="main" class="flex space-evenly">
+        <div id="sidepanel">
             <div id="gridFormHolder">
 
             </div>
@@ -27,16 +27,23 @@
 
             </div>
         </div>
-        <div>
-            <div id="terrainInfoHolder">
-                <div id="weather">
-                    <h2>Weather</h2>
-            
-                    <input type="text">
-                    <button type="button">Toon</button>
-            
-                    <p id="city"></p>
-                    <p id="temp"></p>
+        <div id="centrepanel">
+            <div id="terrainInfoHolder" class="flex space-between">
+                <div id="terrainbuttons">
+                    <button>Terrein 1</button>
+                </div>
+
+                <div id="weather" class="flex">
+                    <div>
+                        <h2>Weather</h2>
+                
+                        <input type="text">
+                        <button type="button">Toon</button>
+                    </div>
+                    <div>
+                        <p id="city"></p>
+                        <p id="temp"></p>
+                    </div>
                 </div>
             </div>
             <div class="canvasHolder">
@@ -45,7 +52,7 @@
                 </canvas>
             </div>
         </div>
-        <div>
+        <div id="sidepanel">
             <div id="settingsPanelHolder">
 
             </div>
