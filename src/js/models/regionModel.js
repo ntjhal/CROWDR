@@ -1,4 +1,4 @@
-export class TerrainModel {
+export class Region {
     //name
     //tents (amount)
     //foodstands (amount)
@@ -6,4 +6,10 @@ export class TerrainModel {
     //trees ??
     //toilets (amount)
     //trashbins (amount)
+    constructor(id) {
+        this.id = id;
+        this.name = `region${id}`
+    }
+
+
 }
