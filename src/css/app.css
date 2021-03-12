@@ -64,8 +64,14 @@ input, button {
     margin: 0 1em;
 }
 
- .holder {
+.holder {
     background-color: var(--color-secondary);
     border-radius: 0.5em;
     box-shadow: 3px 3px #696969;
- }
+}
+
+#terrainform {
+    padding: 1em;
+    width: 100% - padding;
+    height: 50%;
+}

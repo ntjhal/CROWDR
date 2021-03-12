@@ -4,6 +4,7 @@ import { WeatherModel } from './models/weatherModel.js';
 import { VisitorController } from './controllers/visitorController.js';
 import { VisitorView } from './views/visitorView.js';
 
+
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 canvas.width = 700;
@@ -44,3 +45,4 @@ const visitorBtn = visitorDiv.querySelector('button')
 visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
+
