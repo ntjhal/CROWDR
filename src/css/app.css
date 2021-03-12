@@ -1,11 +1,14 @@
 :root {
     --color-primary: rgb(82, 139, 101);
+    --color-primary-dark: rgb(70, 121, 87);
+    --color-primary-light: rgb(162, 248, 191);
     --color-text: rgb(235, 248, 255);
 }
 
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -22,6 +25,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
+    margin-bottom: .3em;
 }
 
 canvas {
@@ -31,6 +35,49 @@ canvas {
 }
 
 input, button {
-    padding: .2rem .4rem;
+    height: 40px;
     margin: 1em 0;
+    border: none;
+    border: solid 2px darkgreen;
+}
+
+input {
+    background: var(--color-primary-light);
+    padding: .5em 1em;
+}
+
+button {
+    background: var(--color-primary-dark);
+    padding: .5em 2em;
+    color: white;
+    transition: .3s;
+}
+
+button:hover {
+    background: var(--color-primary-light);
+    color: black;
+    cursor: pointer;
+}
+
+input:focus, button:focus {
+    outline: solid 2px darkgreen;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    column-gap: .4em;
+}
+
+.field label {
+    font-style: italic;
+}
+
+.field input {
+    max-width: 300px;
 }
