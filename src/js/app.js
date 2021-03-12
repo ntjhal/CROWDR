@@ -6,8 +6,8 @@ import { VisitorView } from './views/visitorView.js';
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
-canvas.width = 500;
-canvas.height = 320;
+canvas.width = 700;
+canvas.height = 700;
 
 // draw German flag
 c.fillStyle = 'black';

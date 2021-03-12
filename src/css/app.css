@@ -1,6 +1,7 @@
 :root {
     --color-primary: rgb(82, 139, 101);
     --color-text: rgb(235, 248, 255);
+    --color-secondary: rgb(169,169,169);
 }
 
 * {
@@ -28,6 +29,8 @@ canvas {
     margin: 1em 0;
     border: solid 1px black;
     background: var(--color-text);
+    width: 700px;
+    height: 700px;
 }
 
 input, button {
@@ -37,6 +40,32 @@ input, button {
 
 .flex {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
+
+.space-between {
+    justify-content: space-between;
+}
+.space-evenly {
+    justify-content: space-evenly;
+}
+
+#sidepanel {
+    border: 1px solid black;
+    width: 400px;
+    height: 800px;
+}
+
+#centrepanel {
+    border: 1px solid red;
+    width: 700px;
+    height: 800px;
+    margin: 0 1em;
+}
+
+ .holder {
+    background-color: var(--color-secondary);
+    border-radius: 0.5em;
+    box-shadow: 3px 3px #696969;
+ }
