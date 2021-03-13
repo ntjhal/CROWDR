@@ -52,6 +52,9 @@ input, button {
 }
 
 #sidepanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid black;
     width: 400px;
     height: 800px;
@@ -70,8 +73,26 @@ input, button {
     box-shadow: 3px 3px #696969;
 }
 
-#terrainform {
+#settingspanel {
     padding: 1em;
-    width: 100% - padding;
-    height: 50%;
+    height: 60%;
+}
+
+#regionform {
+    padding: 1em;
+    height: 38%;
+}
+
+#dragelements {
+    height: 55%;
+}
+
+#regionbuttons {
+    padding: 0.5em;
+    width: 60%;
+}
+
+#visitor {
+    padding: 1em;
+    height: 29%;
 }

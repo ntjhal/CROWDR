@@ -1,21 +1,27 @@
 import { Region } from "../models/regionModel.js";
 
 export class RegionController {
+    constructor(view) {
+        this.regionview = view;
+    }
 
     createRegion() {
         //create a terrain, name must be unique
         let regions = this.getRegions()
         let newID;
 
-        if(regions.length > 0) {
+        if(regions.length >= 6) {
+            return null;
+        } else if(regions.length > 0) {
             newID = Math.max.apply(Math, regions.map(function(r) { return r.id; })) + 1;
         } else {
             newID = 1;
         }
 
         let region = new Region(newID);
-
         this.saveRegion(region);
+
+        return region;
     }
 
     getRegions() {
@@ -51,5 +57,13 @@ export class RegionController {
         let regionsArray = Object.keys(regions).map(function(k) { return regions[k] });
 
         return regionsArray.filter(r => r.id === id)[0];
+    }
+
+    drawRegions() {
+        let regions = this.getRegions(); 
+        
+        for(let region of regions) {
+            this.regionview.render(region);
+        }
     }
 }

@@ -4,6 +4,7 @@ import { WeatherModel } from './models/weatherModel.js';
 import { VisitorController } from './controllers/visitorController.js';
 import { VisitorView } from './views/visitorView.js';
 import { RegionController } from './controllers/regionController.js';
+import { RegionView } from './views/regionView.js';
 
 
 const canvas = document.querySelector('canvas');
@@ -48,8 +49,12 @@ visitorBtn.addEventListener('click', (e) => {
 });
 
 //create a region;
+const regionButtons = document.querySelector('#regionbuttons');
 
-const rc = new RegionController();
-rc.createRegion(); 
+const rv = new RegionView(regionButtons);
+const rc = new RegionController(rv);
+let newRegion = rc.createRegion();
+rc.drawRegions();
 
-console.log(rc.getRegion(1))
+
+
