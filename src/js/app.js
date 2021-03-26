@@ -5,6 +5,7 @@ import { VisitorController } from './controllers/visitorController.js';
 import { VisitorView } from './views/visitorView.js';
 import { RegionController } from './controllers/regionController.js';
 import { RegionView } from './views/regionView.js';
+import { ParkObject } from './models/parkObjectModel.js';
 
 
 const canvas = document.querySelector('canvas');
@@ -56,5 +57,9 @@ const rc = new RegionController(rv);
 let newRegion = rc.createRegion();
 rc.drawRegions();
 
+// 
+
+let po = new ParkObject()
+console.log(po.x)
 
 

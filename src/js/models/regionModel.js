@@ -1,4 +1,4 @@
-export class Region {
+export class Region { 
     //name
     //tents (amount)
     //foodstands (amount)
@@ -9,6 +9,7 @@ export class Region {
     constructor(id) {
         this.id = id;
         this.name = `region${id}`
+        this.parkObjects = [];
     }
 
 
