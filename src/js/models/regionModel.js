@@ -12,5 +12,13 @@ export class Region {
         this.parkObjects = [];
     }
 
+    generateParkObjects() {
+        //for let i of amountoftenst
+            //let tent = new ParkObject(parkObjects.length)
+            //parkObjects.push(tent) 
+        
+        //REPEAT
+    }
+
 
 }
