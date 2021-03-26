@@ -39,22 +39,23 @@ export class RegionController {
 
     saveRegion(region) {
         //convert terrains to JSON and store in localStorage
+        if (region == null)
+            return;
+        
         let regions = this.getRegions();
 
-        regions.push(region); 
-
+        regions = regions.filter(r => r.id !== region.id);
+        console.log(regions);
+        regions.push(region);
+        
         localStorage.setItem('regions', JSON.stringify(regions));
     }
 
     getRegion(id) {
+        if (id == null)
+            return;
         //Get the terrain using the name
-        let regions = [];
-
-        if(localStorage.regions !== undefined) {
-            regions = JSON.parse(localStorage.regions)
-        }
-        
-        let regionsArray = Object.keys(regions).map(function(k) { return regions[k] });
+        regionsArray = this.getRegions();
 
         return regionsArray.filter(r => r.id === id)[0];
     }
