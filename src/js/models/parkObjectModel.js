@@ -8,10 +8,10 @@ export class Placeable {
 }
 
 export class ParkObject extends Placeable{
-    constructor(id) {
+    constructor(id, type) {
+        super()
         this.id = id;
         this.idname = 'parkobject-'.id; 
-        super()
     }
 }
 
