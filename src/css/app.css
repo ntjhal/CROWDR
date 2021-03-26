@@ -33,9 +33,14 @@ canvas {
     height: 700px;
 }
 
-input, button {
+input, .btn {
     padding: .2rem .4rem;
-    margin: 1em 0;
+    margin: 0.5rem 0.5rem;
+}
+
+.regionbtn {
+    padding: .2rem .4rem;
+    margin: 1rem 0; 
 }
 
 .flex {
@@ -90,6 +95,8 @@ input, button {
 #regionbuttons {
     padding: 0.5em;
     width: 60%;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 #visitor {

@@ -6,6 +6,7 @@ export class RegionView {
     render(region) {
         let btn = document.createElement('button');
         btn.innerHTML = region.name;
+        btn.classList.add("regionbtn");
 
         btn.addEventListener('click', (e) => {
             //TODO whatever calls are triggered by this button 
