@@ -18,6 +18,7 @@ export class RegionView {
 
     renderParkObjects(region) {
         let dragelements = document.getElementById('dragelements');
+        dragelements.innerHTML = region.name;
 
         const typeArray = region.parkObjects.map(x => x.type);
         let uniqueTypes = typeArray.filter((item, i, ar) => ar.indexOf(item) === i);
