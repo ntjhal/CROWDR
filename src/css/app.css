@@ -89,7 +89,24 @@ input, .btn {
 }
 
 #dragelements {
-    height: 55%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50%;
+    
+}
+
+.dragelementsholder {
+    margin: 15px;
+    border: 1px solid black;
+    width: 75px;
+    height: 75px;
+    
+}
+
+.dragelement {
+    
 }
 
 #regionbuttons {

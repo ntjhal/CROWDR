@@ -55,7 +55,10 @@ const regionButtons = document.querySelector('#regionbuttons');
 const rv = new RegionView(regionButtons);
 const rc = new RegionController(rv);
 let newRegion = rc.createRegion();
-rc.saveRegion(newRegion);
+if (newRegion != null) {
+    newRegion.generateParkObjects(3,3,3,3,3,3)
+    rc.saveRegion(newRegion);
+}
 rc.drawRegions();
 
 
