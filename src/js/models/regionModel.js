@@ -47,7 +47,7 @@ export class Region {
         for (let i = 0; i < numberOfFoodstands; i++) {
             let food = new ParkObject(this.parkObjects.length + 1, 'foodstand', 'src/images/Foodstand_3.png', 1, 1);
             food.maxVisitors = 0;
-            food.typeOfFood = null;
+            food.foodtype = "";
             this.parkObjects.push(food);
         }
         //Drinks
