@@ -5,8 +5,8 @@ export class RegionView {
         this.div = div;
     }
 
-    setParkObjectView(parkObjectView) {
-        this.parkObjectView = parkObjectView;
+    setParkObjectController(poc) {
+        this.parkObjectView = new ParkObjectDetailView(poc)
     }
 
     render(region) {

@@ -7,6 +7,7 @@ import { RegionController } from './controllers/regionController.js';
 import { RegionView } from './views/regionView.js';
 import { ParkObject } from './models/parkObjectModel.js';
 import { ParkObjectDetailView } from './views/parkObjectView.js'
+import { ParkObjectController } from './controllers/parkObjectController.js';
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -67,8 +68,8 @@ const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
 const rc = new RegionController(rv);
-const pov = new ParkObjectDetailView(rc);
-rv.setParkObjectView(pov);
+const poc = new ParkObjectController(rc);
+rv.setParkObjectController(poc);
 let newRegion = rc.createRegion();
 if (newRegion != null) {
     newRegion.generateParkObjects(3,3,3,3,3,3)
