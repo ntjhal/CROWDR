@@ -16,6 +16,8 @@ export class RegionView {
 
         btn.addEventListener('click', (e) => {
             //TODO whatever calls are triggered by this button 
+            document.getElementById('settingspanel').innerHTML = "";
+
             this.renderParkObjects(region)
         });
 

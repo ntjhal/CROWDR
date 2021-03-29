@@ -62,13 +62,11 @@ input, .btn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid black;
     width: 400px;
     height: 850px;
 }
 
 #centrepanel {
-    border: 1px solid red;
     width: 750px;
     height: 850px;
     margin: 0 1em;
@@ -101,7 +99,6 @@ input, .btn {
 
 .dragelementsholder {
     margin: 15px;
-    border: 1px solid black;
     width: 150px;
     height: 150px;
     position: relative;
@@ -112,6 +109,10 @@ input, .btn {
 
 .dragelement {
     position: absolute;
+}
+
+.dragelement :hover {
+    background: rgba(0,0,0,.3);
 }
 
 .dragimg {
