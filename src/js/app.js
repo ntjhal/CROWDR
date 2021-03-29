@@ -39,13 +39,25 @@ const cfm = new ConfigForm();
 const cfv = new ConfigFormView(document.forms.configuration);
 const cfc = new ConfigFormController(cfm, cfv);
 
-const q1 = new ConfigQuestion(1, 'Wat is de naam van de regio?', 'text');
-const q2 = new ConfigQuestion(2, 'Hoeveel tenten?', 'number');
-const q3 = new ConfigQuestion(3, 'Hoeveel eetkraampjes?', 'number');
-const q4 = new ConfigQuestion(4, 'Hoeveel drankkraampjes?', 'number');
-const q5 = new ConfigQuestion(5, 'Hoeveel bomen?', 'number');
-const q6 = new ConfigQuestion(6, 'Hoeveel toiletgebouwen?', 'number');
-const q7 = new ConfigQuestion(7, 'Hoeveel prullenbakken?', 'number');
+const q1 = new ConfigQuestion('name', 'What is the name of the region?', 'text');
+const q2 = new ConfigQuestion('tents', 'How many tents?', 'number');
+const q3 = new ConfigQuestion('eating_stalls', 'How many eating stalls?', 'number', {
+    max: 6,
+    ifTent: 3
+});
+const q4 = new ConfigQuestion('drinking_stalls', 'How many drinking stalls?', 'number', {
+    max: 4,
+    ifTent: 2
+});
+const q5 = new ConfigQuestion('tree_high', 'How many high trees?', 'number');
+const q6 = new ConfigQuestion('tree_wide', 'How many wide trees?', 'number');
+const q7 = new ConfigQuestion('tree_shadow', 'How many shadow trees?', 'number');
+const q8 = new ConfigQuestion('toilet_stalls', 'How many toilet stalls?', 'number', {
+    max: 5
+});
+const q9 = new ConfigQuestion('bins', 'How many waste bins?', 'number', {
+    percentOfSpace: .05
+});
 
-cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7]);
+cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();

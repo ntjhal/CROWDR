@@ -22,14 +22,17 @@ export class ConfigFormView {
         input.type = question.type;
         
         let button = document.createElement('button');
-        button.textContent = 'Volgende';
+        button.textContent = 'Next';
         button.type = 'button';
         button.addEventListener('click', () => {
-            this.onNext(question.id, input.value);
+            this.onNext(question, input.value);
         });
 
         flexdiv.appendChild(input);
         flexdiv.appendChild(button);
+
+        let errorDiv = document.createElement('div');
+        this.errorDiv = errorDiv;
 
         let label = document.createElement('label');
         label.textContent = question.question;
@@ -37,6 +40,7 @@ export class ConfigFormView {
 
         field.appendChild(label);
         field.appendChild(flexdiv);
+        field.appendChild(errorDiv);
 
         // insert before the reset button
         this.formNode.insertBefore(field, this.resetBtn);
@@ -46,7 +50,7 @@ export class ConfigFormView {
         let button = document.createElement('button');
         button.type = 'button';
         button.id = 'reset';
-        button.textContent = 'Begin opniuew';
+        button.textContent = 'Reset';
         button.addEventListener('click', this.onReset);
 
         this.formNode.appendChild(button);
@@ -59,5 +63,26 @@ export class ConfigFormView {
                 div.removeChild(child);
             }
         });
+    }
+
+    showError(error) {
+        // clear old errors
+        this.clearErrors();
+
+        let text = document.createElement('p');
+        text.textContent = error;
+        text.classList.add('error');
+
+        this.errorDiv.appendChild(text);        
+    }
+
+    clearErrors() {
+        if (this.errorDiv == null) {
+            return;
+        }
+
+        this.errorDiv.childNodes.forEach(child => {
+            this.errorDiv.removeChild(child);
+        })
     }
 }

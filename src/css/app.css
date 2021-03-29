@@ -81,3 +81,8 @@ input:focus, button:focus {
 .field input {
     max-width: 300px;
 }
+
+.error {
+    color: yellow;
+    font-style: italic;
+}

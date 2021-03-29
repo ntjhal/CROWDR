@@ -16,7 +16,17 @@ export class ConfigFormController {
         this.nextQuestion();
     }
 
-    saveAnswer(id, answer) {
+    saveAnswer(question, answer) {
+        const validationResult = question.validate(this.model.answers, answer);
+
+        // validate the answer
+        if (!validationResult.valid) {
+            // show the error message
+            this.view.showError(validationResult.message); 
+                       
+            return false;
+        }
+
         // start with an empty object
         let answers = {};
 
@@ -27,13 +37,21 @@ export class ConfigFormController {
         }
 
         // add the answer to the answer list
-        answers[`q${id}`] = answer;
+        answers[`${question.id}`] = answer;
 
         // save the new list
         localStorage.setItem('answers', JSON.stringify(answers));
+
+        return true;
     }
 
     nextQuestion() {
+        // clear the error
+        this.view.clearErrors();
+
+        // update the answers in the model
+        this.model.answers = localStorage.getItem('answers');
+
         // get the next question
         let question = this.model.nextQuestion();
 
@@ -47,9 +65,13 @@ export class ConfigFormController {
         this.showQuestion(question);
     }
 
-    onNext(id, answer) {
+    onNext(question, answer) {
         // save the answer
-        this.saveAnswer(id, answer);
+        let success = this.saveAnswer(question, answer);
+
+        if (!success) {
+            return;
+        }
 
         // show the next question
         this.nextQuestion();
@@ -61,6 +83,9 @@ export class ConfigFormController {
 
         // reset the model
         this.model.reset();
+
+        // clear the errors
+        this.view.clearErrors();
 
         // show the first question again
         this.nextQuestion();
