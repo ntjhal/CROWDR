@@ -1,8 +1,13 @@
 import { WeatherController } from './controllers/weatherController.js';
 import { WeatherView } from './views/weatherView.js';
 import { WeatherModel } from './models/weatherModel.js';
+
 import { VisitorController } from './controllers/visitorController.js';
 import { VisitorView } from './views/visitorView.js';
+
+import { ConfigForm, ConfigQuestion } from './models/configForm.js';
+import { ConfigFormView } from './views/configFormView.js';
+import { ConfigFormController } from './controllers/configFormController.js';
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -33,7 +38,7 @@ weatherBtn.addEventListener('click', (e) => {
     wc.getWeather(input.value);
 });
 
-//Display a visitor
+// display a visitor
 const visitorDiv = document.querySelector('#visitor');
 
 const vv = new VisitorView(visitorDiv);
@@ -44,3 +49,31 @@ const visitorBtn = visitorDiv.querySelector('button')
 visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
+
+// configuration form
+const cfm = new ConfigForm();
+const cfv = new ConfigFormView(document.forms.configuration);
+const cfc = new ConfigFormController(cfm, cfv);
+
+const q1 = new ConfigQuestion('name', 'What is the name of the region?', 'text');
+const q2 = new ConfigQuestion('tents', 'How many tents?', 'number');
+const q3 = new ConfigQuestion('eating_stalls', 'How many eating stalls?', 'number', {
+    max: 6,
+    ifTent: 3
+});
+const q4 = new ConfigQuestion('drinking_stalls', 'How many drinking stalls?', 'number', {
+    max: 4,
+    ifTent: 2
+});
+const q5 = new ConfigQuestion('tree_high', 'How many high trees?', 'number');
+const q6 = new ConfigQuestion('tree_wide', 'How many wide trees?', 'number');
+const q7 = new ConfigQuestion('tree_shadow', 'How many shadow trees?', 'number');
+const q8 = new ConfigQuestion('toilet_stalls', 'How many toilet stalls?', 'number', {
+    max: 5
+});
+const q9 = new ConfigQuestion('bins', 'How many waste bins?', 'number', {
+    percentOfSpace: .05
+});
+
+cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
+cfc.init();
