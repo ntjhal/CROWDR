@@ -1,6 +1,12 @@
+import { ParkObjectDetailView } from "./parkObjectView.js";
+
 export class RegionView {
     constructor(div) {
         this.div = div;
+    }
+
+    setParkObjectView(parkObjectView) {
+        this.parkObjectView = parkObjectView;
     }
 
     render(region) {
@@ -18,7 +24,7 @@ export class RegionView {
 
     renderParkObjects(region) {
         let dragelements = document.getElementById('dragelements');
-        dragelements.innerHTML = region.name;
+        dragelements.innerHTML = "";
 
         const typeArray = region.parkObjects.map(x => x.type);
         let uniqueTypes = typeArray.filter((item, i, ar) => ar.indexOf(item) === i);
@@ -27,13 +33,25 @@ export class RegionView {
         for (let type of uniqueTypes) {
             let typeDiv = document.createElement('div');
             typeDiv.classList.add('dragelementsholder');
-            typeDiv.innerHTML = type;
+            //typeDiv.innerHTML = type;
 
             for (let po of region.parkObjects.filter(x => x.type === type)) {
                 let object = document.createElement('div');
                 object.id = `parkobject-${po.id}`;
                 object.classList.add('dragelement');
+                object.style.width = `${po.width * 50}px`;
+                object.style.height = `${po.height * 50}px`;
 
+                let image = document.createElement('img');
+                image.classList.add('dragimg')
+                if(po.imagesrc !== undefined) 
+                    image.src = po.imagesrc;
+                
+                object.addEventListener('click', (e) => {
+                    this.parkObjectView.renderDetails(region.id, po);
+                })
+            
+                object.appendChild(image);
                 typeDiv.appendChild(object);
             }
 

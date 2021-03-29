@@ -6,12 +6,25 @@ import { VisitorView } from './views/visitorView.js';
 import { RegionController } from './controllers/regionController.js';
 import { RegionView } from './views/regionView.js';
 import { ParkObject } from './models/parkObjectModel.js';
+import { ParkObjectDetailView } from './views/parkObjectView.js'
+
+document.getElementById('createmode').onclick = () => {
+    document.getElementById('simulate').classList.add('hidden');
+    document.getElementById('create').classList.remove('hidden');
+}
+
+document.getElementById('simulatemode').onclick = () => {
+    document.getElementById('simulate').classList.remove('hidden');
+    document.getElementById('create').classList.add('hidden');
+
+}
 
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
-canvas.width = 700;
-canvas.height = 700;
+canvas.width = 750;
+canvas.height = 750;
+//One grid position is 50 x 50 
 
 // draw German flag
 c.fillStyle = 'black';
@@ -54,6 +67,8 @@ const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
 const rc = new RegionController(rv);
+const pov = new ParkObjectDetailView(rc);
+rv.setParkObjectView(pov);
 let newRegion = rc.createRegion();
 if (newRegion != null) {
     newRegion.generateParkObjects(3,3,3,3,3,3)

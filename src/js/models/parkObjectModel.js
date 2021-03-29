@@ -1,17 +1,18 @@
 export class Placeable {
-    constructor() {
+    constructor(width, height) {
         this.x = undefined;
         this.y = undefined;
-        this.width = undefined;
-        this.height = undefined;
+        this.width = width;
+        this.height = height;
     }
 }
 
 export class ParkObject extends Placeable{
-    constructor(id, type) {
-        super()
+    constructor(id, type, imgsrc, width, height) {
+        super(width, height)
         this.id = id;
         this.type = type;
+        this.imagesrc = imgsrc;
         this.idname = 'parkobject-'.id; 
     }
 }
