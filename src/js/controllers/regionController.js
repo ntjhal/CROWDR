@@ -45,8 +45,20 @@ export class RegionController {
         let regions = this.getRegions();
 
         regions = regions.filter(r => r.id !== region.id);
-        console.log(regions);
+        
         regions.push(region);
+
+        function compare(a, b) {
+            if (a.id < b.id) {
+                return -1;
+            }
+            if (a.id > b.id) {
+                return 1;
+            }
+            return 0;
+        }
+
+        regions.sort(compare);
         
         localStorage.setItem('regions', JSON.stringify(regions));
     }
@@ -55,7 +67,7 @@ export class RegionController {
         if (id == null)
             return;
         //Get the terrain using the name
-        regionsArray = this.getRegions();
+        let regionsArray = this.getRegions();
 
         return regionsArray.filter(r => r.id === id)[0];
     }

@@ -6,8 +6,10 @@ export class ParkObjectController {
     updateObject(regionID, object) {
         let region = this.regioncontroller.getRegion(regionID);
 
-        let updatedObjects = region.parkObjects;
-        updatedObjects.filter(o => o.id !== object.id);
+        let updatedObjects = [];
+        updatedObjects = region.parkObjects;
+        let index =  updatedObjects.findIndex(o => o.id === object.id);
+        updatedObjects.splice(index, 1)
         updatedObjects.push(object);
 
         region.parkObjects = updatedObjects;
