@@ -194,7 +194,7 @@ input:focus, button:focus {
 
 #regionbuttons {
     padding: 0.5em;
-    height: 30px;
+    height: 50px;
     width: 60%;
     display: flex;
     justify-content: flex-start;
@@ -222,3 +222,22 @@ input:focus, button:focus {
     height: 25px;
     border-radius: 5px;
 }
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: forestgreen;
+    width: 750px;
+    height: 750px;
+    margin: 1em 0;
+    border: solid 1px black;
+}
+
+.griditem {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
