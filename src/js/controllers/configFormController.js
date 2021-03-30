@@ -1,7 +1,8 @@
 export class ConfigFormController {
-    constructor(model, view) {
+    constructor(model, view, regioncontroller) {
         this.model = model;
         this.view = view;
+        this.regioncontroller = regioncontroller;
     }
 
     init() {
@@ -58,6 +59,8 @@ export class ConfigFormController {
         // see if there is any
         if (question == null) {
             // we are done here
+            this.regioncontroller.createRegion();
+            this.regioncontroller.drawRegions();
             return;
         }
 

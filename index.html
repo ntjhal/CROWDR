@@ -23,17 +23,36 @@
         <div id='create'>
             <div class="flex space-evenly">
                 <div id="sidepanel">
-                    <div id="gridform" class="holder">
-                        <h2>Terrein maken</h2>
+                    <div id="configForm" class="holder">
+                        <h2>Configuration</h2>
+                
+                        <form name="configuration"></form>
                     </div>
-                    <div id="dragelements" class="holder">
-
-                    </div>
+        
+                    <div id="dragelements" class="holder"></div>
                 </div>
                 <div id="centrepanel">
                     <div id="regioninfo" class="holder flex space-between">
-                        <div id="regionbuttons">
-                            
+                        <div id="regionbuttons"></div>
+                    </div>
+                    <div class="canvas">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div id="sidepanel">
+                    <div id="settingspanel" class="holder">
+                        <h2>Object details</h2>
+                    </div>
+
+                    <div class="holder">
+                        <div id="visitor" class="flex">
+                            <h2>Visitor</h2>
+                    
+                            <button type="button">Toon nieuwe</button>
+                    
+                            <p id="name"></p>
+                            <p id="gender"></p>
+                            <p id="city"></p>
                         </div>
 
                         <div id="weather" class="flex">
@@ -52,37 +71,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="canvas">
-                        <canvas>
-
-                        </canvas>
-                    </div>
-                </div>
-                <div id="sidepanel">
-                    <div id="settingspanel" class="holder">
-                        <h2>Object details</h2>
-
-                    </div>
-
-                    <div id="visitor" class="holder">
-                        <h2>Visitor</h2>
-                
-                        <button type="button">Toon nieuwe</button>
-                
-                        <p id="name"></p>
-                        <p id="gender"></p>
-                        <p id="city"></p>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="simulate" class="hidden">
-
-        </div>
-
-
-        </div>
+        
+        <div id="simulate" class="hidden"></div>
+        
     </div>
 </body>
 </html>

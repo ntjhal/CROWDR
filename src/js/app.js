@@ -68,10 +68,19 @@ visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
 
+//create a region;
+const regionButtons = document.querySelector('#regionbuttons');
+
+const rv = new RegionView(regionButtons);
+const rc = new RegionController(rv);
+const poc = new ParkObjectController(rc);
+rv.setParkObjectController(poc);
+rc.drawRegions();
+
 // configuration form
 const cfm = new ConfigForm();
 const cfv = new ConfigFormView(document.forms.configuration);
-const cfc = new ConfigFormController(cfm, cfv);
+const cfc = new ConfigFormController(cfm, cfv, rc);
 
 const q1 = new ConfigQuestion('name', 'What is the name of the region?', 'text');
 const q2 = new ConfigQuestion('tents', 'How many tents?', 'number');
@@ -96,16 +105,4 @@ const q9 = new ConfigQuestion('bins', 'How many waste bins?', 'number', {
 cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
-//create a region;
-const regionButtons = document.querySelector('#regionbuttons');
 
-const rv = new RegionView(regionButtons);
-const rc = new RegionController(rv);
-const poc = new ParkObjectController(rc);
-rv.setParkObjectController(poc);
-let newRegion = rc.createRegion();
-if (newRegion != null) {
-    newRegion.generateParkObjects(3,3,3,3,3,3)
-    rc.saveRegion(newRegion);
-}
-rc.drawRegions();

@@ -53,6 +53,7 @@ export class ConfigQuestion {
 
         if (this.rules.percentOfSpace) {
             // TODO: get space left
+            let space = 2
             validationResult = this.validator.percentOfSpace(space, this.rules.percentOfSpace, answer);
         }
 

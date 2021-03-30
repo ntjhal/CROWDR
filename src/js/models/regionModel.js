@@ -12,6 +12,8 @@ export class Region {
         this.id = id;
         this.name = `region${id}`; //temp
         this.parkObjects = [];
+
+        this.handleConfigAnswers();
     }
 
     handleConfigAnswers() {
@@ -20,19 +22,21 @@ export class Region {
             answers = JSON.parse(localStorage.answers);
         }
 
-        this.name = answers['q1'];
+        this.name = answers['name'];
         this.generateParkObjects(
-            Number(answers['q2']),
-            Number(answers['q3']),
-            Number(answers['q4']),
-            Number(answers['q5']),
-            Number(answers['q6']),
-            Number(answers['q7'])
+            Number(answers['tents']),
+            Number(answers['eating_stalls']),
+            Number(answers['drinking_stalls']),
+            Number(answers['tree_high']),
+            Number(answers['tree_wide']),
+            Number(answers['tree_shadow']),
+            Number(answers['toilet_stalls']),
+            Number(answers['bins']),
         );
         
     }
 
-    generateParkObjects(numberOfTents, numberOfFoodstands, numberOfDrinkstands, numberOfTrees, numberOfToilets, numberOfTrashcans) {
+    generateParkObjects(numberOfTents, numberOfFoodstands, numberOfDrinkstands, numberOfTreesHigh, numberOfTreesWide, numberOfTreesShadow, numberOfToilets, numberOfTrashcans) {
         //Tents
         
         for (let i = 0; i < numberOfTents; i++) {
@@ -56,8 +60,16 @@ export class Region {
             this.parkObjects.push(drink);
         }
         //Trees
-        for (let i = 0; i < numberOfTrees; i++) {
-            let tree = new ParkObject(this.parkObjects.length + 1, 'tree', 'src/images/Tree.png', 1, 1);
+        for (let i = 0; i < numberOfTreesHigh; i++) {
+            let tree = new ParkObject(this.parkObjects.length + 1, 'tree_high', 'src/images/Tree.png', 1, 1);
+            this.parkObjects.push(tree);
+        }
+        for (let i = 0; i < numberOfTreesWide; i++) {
+            let tree = new ParkObject(this.parkObjects.length + 1, 'tree_wide', 'src/images/Tree.png', 1, 2);
+            this.parkObjects.push(tree);
+        }
+        for (let i = 0; i < numberOfTreesShadow; i++) {
+            let tree = new ParkObject(this.parkObjects.length + 1, 'tree_shadows', 'src/images/Tree.png', 3, 3);
             this.parkObjects.push(tree);
         }
         //Toilets
