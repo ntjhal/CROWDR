@@ -5,8 +5,6 @@ export class ParkObjectDetailView {
 
     //TODO verbeteren van deze code, veel dubbele code
     renderDetails(regionID, object) {
-        console.log(regionID);
-        console.log(object);
 
         let settingspanel = document.getElementById('settingspanel');
         settingspanel.innerHTML = '<h2>Object details</h2><br>' +
