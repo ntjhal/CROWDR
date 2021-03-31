@@ -12,8 +12,37 @@ export class ParkObjectController {
         updatedObjects.splice(index, 1)
         updatedObjects.push(object);
 
+        function compare(a, b) {
+            if (a.id < b.id) {
+                return -1;
+            }
+            if (a.id > b.id) {
+                return 1;
+            }
+            return 0;
+        }
+
+        updatedObjects.sort(compare)
+
         region.parkObjects = updatedObjects;
 
         this.regioncontroller.saveRegion(region);
+    }
+
+    getObject(regionID, objectID) {
+        let region = this.regioncontroller.getRegion(regionID);
+
+        let index = region.parkObjects.findIndex(o => o.id == objectID);
+        let object = region.parkObjects[index];
+
+        return object;
+    }
+
+    findObjectOnPos(regionID, x, y) {
+        let region = this.regioncontroller.getRegion(regionID);
+        let index = region.parkObjects.findIndex(o => o.x == x && o.y == y);
+        let object = region.parkObjects[index];
+
+        return object;
     }
 }

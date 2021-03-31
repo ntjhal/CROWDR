@@ -15,6 +15,7 @@ import { ConfigFormView } from './views/configFormView.js';
 import { ConfigFormController } from './controllers/configFormController.js';
 
 import { GridView } from './views/gridView.js';
+import { GridController } from './controllers/gridController.js';
 
 
 document.getElementById('createmode').onclick = () => {
@@ -108,7 +109,7 @@ cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
 //Render the basic grid
-const gv = new GridView();
-gv.renderGrid();
+const gc = new GridController(poc); //parameter = parkobjectcontroller
+gc.init();
 
 

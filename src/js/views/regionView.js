@@ -6,7 +6,8 @@ export class RegionView {
     }
 
     setParkObjectController(poc) {
-        this.parkObjectView = new ParkObjectDetailView(poc)
+        this.parkObjectController = poc;
+        this.parkObjectView = new ParkObjectDetailView(poc);
     }
 
     render(region) {
@@ -18,6 +19,7 @@ export class RegionView {
             //TODO whatever calls are triggered by this button 
             document.getElementById('settingspanel').innerHTML = "";
 
+            this.parkObjectController.regioncontroller.currentRegionID = region.id;
             this.renderParkObjects(region)
         });
 

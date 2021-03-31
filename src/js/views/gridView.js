@@ -1,11 +1,14 @@
 export class GridView {
 
-    constructor() {
+    constructor(controller) {
+        this.gridController = controller;
         this.dragged;
+        this.width = 15;
+        this.height = 15;
     }
      
 
-    renderGrid() {
+    renderGrid() { //AlREADY EXISTING ITEMS IN GRID ARE NOT BEING DRAWN AT RELOAD AT THE MOMENT
         let grid = document.getElementById('grid');
 
         for(let x = 1; x <= 15; x++) {
@@ -54,15 +57,18 @@ export class GridView {
     
             if (dropzone != null) {
                 dropzone.classList.remove('current');
+
+                let objectid = this.dragged.id.split('-')[1];
                 
                 if (dropzone.classList.contains('dragelementsholder')) {
                     let holdertype = dropzone.id.split('-')[0];
                     let objecttype = this.dragged.id.split('-')[0];
-                    
+
                     if (holdertype == objecttype) {
+                        this.gridController.resetPlacement(objectid);
                         dropzone.append(this.dragged);
                     }
-                } else {
+                } else if (this.gridController.place(objectid, dropzone) == true){
                     dropzone.append(this.dragged);
                 }
             }
