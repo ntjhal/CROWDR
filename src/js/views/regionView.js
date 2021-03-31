@@ -34,27 +34,37 @@ export class RegionView {
         
         for (let type of uniqueTypes) {
             let typeDiv = document.createElement('div');
+            typeDiv.id = `${type}-holder`;
             typeDiv.classList.add('dragelementsholder');
             //typeDiv.innerHTML = type;
 
             for (let po of region.parkObjects.filter(x => x.type === type)) {
                 let object = document.createElement('div');
-                object.id = `parkobject-${po.id}`;
+                object.id = `${po.type}-${po.id}`;
                 object.classList.add('dragelement');
                 object.style.width = `${po.width * 50}px`;
                 object.style.height = `${po.height * 50}px`;
+                object.draggable = true;
 
                 let image = document.createElement('img');
                 image.classList.add('dragimg')
-                if(po.imagesrc !== undefined) 
+                if(po.imagesrc !== undefined) {  
                     image.src = po.imagesrc;
+                    typeDiv.style.backgroundImage = `url('${po.imagesrc}')`;
+                    typeDiv.style.backgroundSize = `${po.width * 50}px ${po.height * 50}px`
+                    typeDiv.classList.add('typeDiv');
+                }
                 
+                image.draggable = false;
+
                 object.addEventListener('click', (e) => {
                     this.parkObjectView.renderDetails(region.id, po);
                 })
             
                 object.appendChild(image);
                 typeDiv.appendChild(object);
+                typeDiv.classList.add('droppable')
+                
             }
 
             dragelements.appendChild(typeDiv);
