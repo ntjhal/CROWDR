@@ -1,6 +1,9 @@
 export class GridView {
 
-    constructor(controller) {
+    constructor(controller, regionView) {
+        this.regionView = regionView;
+        this.regionView.onClick = this.renderGrid.bind(this);
+
         this.gridController = controller;
         this.dragged;
         this.width = 15;
@@ -10,6 +13,7 @@ export class GridView {
 
     renderGrid() {
         let grid = document.getElementById('grid');
+        grid.innerHTML = "";
 
         for(let x = 1; x <= 15; x++) {
             for(let y = 1; y <= 15; y++) {

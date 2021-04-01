@@ -61,6 +61,7 @@ export class ConfigFormController {
             // we are done here
             this.regioncontroller.createRegion();
             this.regioncontroller.drawRegions();
+            this.onReset();
             return;
         }
 

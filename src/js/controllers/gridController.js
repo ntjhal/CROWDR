@@ -1,10 +1,10 @@
 import { GridView } from "../views/gridView.js";
 
 export class GridController {
-    constructor(parkObjectController) {
+    constructor(parkObjectController, regionView) {
         this.parkObjectController = parkObjectController;
         this.regionController = parkObjectController.regioncontroller;
-        this.gridView = new GridView(this);
+        this.gridView = new GridView(this, regionView);
     }
 
     init() {

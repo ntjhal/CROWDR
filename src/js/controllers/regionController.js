@@ -73,7 +73,9 @@ export class RegionController {
     }
 
     drawRegions() {
-        let regions = this.getRegions(); 
+        let regions = this.getRegions();
+        let regionButtons = document.querySelector('#regionbuttons');
+        regionButtons.innerHTML = "";
         
         for(let region of regions) {
             this.regionview.render(region);
