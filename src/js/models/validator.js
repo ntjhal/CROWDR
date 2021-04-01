@@ -1,5 +1,7 @@
 export class Validator {
-    answers = [];
+    constructor() {
+        this.answers = [];
+    }
 
     max(amount, value) {
         // check if the given value is higher than the maximum value

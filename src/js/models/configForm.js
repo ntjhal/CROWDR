@@ -1,9 +1,11 @@
 import { Validator, ValidationResult } from "./validator.js";
 
 export class ConfigForm {
-    questions = [];
-    answers = [];
-    current = 0;
+    constructor() {
+        this.questions = [];
+        this.answers = [];
+        this.current = 0;
+    }
 
     addQuestions(questions) {
         questions.forEach(q => {
