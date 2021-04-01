@@ -1,3 +1,4 @@
+import { GridController } from "../controllers/gridController.js";
 import { ParkObjectDetailView } from "./parkObjectView.js";
 
 export class RegionView {
@@ -21,6 +22,7 @@ export class RegionView {
 
             this.parkObjectController.regioncontroller.currentRegionID = region.id;
             this.renderParkObjects(region)
+            this.renderParkObjectsInGrid(this.parkObjectController.getObjectsOnGrid(region.id))
         });
 
         this.div.appendChild(btn);
@@ -70,6 +72,19 @@ export class RegionView {
             }
 
             dragelements.appendChild(typeDiv);
+        }
+    }
+
+    renderParkObjectsInGrid(objectsInGrid) {
+        let grid = document.getElementById('grid');
+
+        for (let obj of objectsInGrid) {
+            let griditem = grid.querySelector(`div[id="{${obj.x}-${obj.y}}"]`);
+            let dragitem = document.getElementById(`${obj.type}-${obj.id}`);
+
+            if (griditem != null && dragitem != null) {
+                griditem.append(dragitem);
+            }
         }
     }
 }

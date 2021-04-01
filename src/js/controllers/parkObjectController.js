@@ -45,4 +45,10 @@ export class ParkObjectController {
 
         return object;
     }
+
+    getObjectsOnGrid(regionID) {
+        let region = this.regioncontroller.getRegion(regionID);
+
+        return region.parkObjects.filter(o => o.x != null && o.y != null);
+    }
 }

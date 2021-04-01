@@ -8,7 +8,7 @@ export class GridView {
     }
      
 
-    renderGrid() { //AlREADY EXISTING ITEMS IN GRID ARE NOT BEING DRAWN AT RELOAD AT THE MOMENT
+    renderGrid() {
         let grid = document.getElementById('grid');
 
         for(let x = 1; x <= 15; x++) {
