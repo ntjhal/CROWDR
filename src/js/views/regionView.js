@@ -6,6 +6,22 @@ export class RegionView {
         this.div = div;
         this.gridRender = null;
         this.lockGridItems = null;
+
+        this.init();
+    }
+
+    init() {
+        // render a 'lock' button
+        let lock = document.createElement('button');
+        lock.textContent = 'Lock';
+        lock.addEventListener('click', (e) => {
+            this.lock();
+            lock.disabled = true;
+            lock.classList.add('disabled');
+        });
+
+        let infoDiv = document.querySelector('#regioninfo');
+        infoDiv.appendChild(lock);
     }
 
     setParkObjectController(poc) {
@@ -32,6 +48,27 @@ export class RegionView {
         this.div.appendChild(btn);
     }
 
+    lock() {
+        let items = document.querySelectorAll('#grid .griditem');
+        let elements = document.querySelector('#dragelements');
+
+        items.forEach(item => {
+            // loop through all items on the grid
+            item.childNodes.forEach(child => {
+                // set draggable to false
+                child.draggable = false;
+            });
+        });
+
+        elements.childNodes.forEach(child => {
+            child.childNodes.forEach(elem => {
+                elem.disabled = true;
+                elem.draggable = false;
+                elem.classList.add('disabled');
+            })
+        });
+    }
+
     renderParkObjects(region) {
         let dragelements = document.getElementById('dragelements');
         dragelements.innerHTML = "";
@@ -39,7 +76,6 @@ export class RegionView {
         const typeArray = region.parkObjects.map(x => x.type);
         let uniqueTypes = typeArray.filter((item, i, ar) => ar.indexOf(item) === i);
 
-        
         for (let type of uniqueTypes) {
             let typeDiv = document.createElement('div');
             typeDiv.id = `${type}-holder`;
@@ -72,7 +108,6 @@ export class RegionView {
                 object.appendChild(image);
                 typeDiv.appendChild(object);
                 typeDiv.classList.add('droppable')
-                
             }
 
             dragelements.appendChild(typeDiv);
