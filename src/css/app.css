@@ -147,7 +147,7 @@ input:focus, button:focus {
 
 #extra {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     padding: 1em;
     height: 30%;
     overflow-y: scroll;
@@ -214,9 +214,7 @@ input:focus, button:focus {
 
 .field {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
-    margin-top: 20px;
     font-size: 1.2rem;
     font-weight: 500;
 }
