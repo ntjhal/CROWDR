@@ -1,15 +1,19 @@
 export class GridView {
 
     constructor(controller, regionView) {
-        this.regionView = regionView;
-        this.regionView.onClick = this.renderGrid.bind(this);
-
         this.gridController = controller;
+        this.regionView = regionView;
+        this.regionView.gridRender = this.renderGrid.bind(this);
+        this.regionView.lockGridItems = this.lockGrid.bind(this)
+
         this.dragged;
         this.width = 15;
         this.height = 15;
     }
-     
+    
+    lockGrid() {
+        this.gridController.lockGridSquaresFullGrid();
+    }
 
     renderGrid() {
         let grid = document.getElementById('grid');

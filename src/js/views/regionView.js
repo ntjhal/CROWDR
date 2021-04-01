@@ -4,7 +4,8 @@ import { ParkObjectDetailView } from "./parkObjectView.js";
 export class RegionView {
     constructor(div) {
         this.div = div;
-        this.onClick = null;
+        this.gridRender = null;
+        this.lockGridItems = null;
     }
 
     setParkObjectController(poc) {
@@ -23,8 +24,9 @@ export class RegionView {
 
             this.parkObjectController.regioncontroller.currentRegionID = region.id;
             this.renderParkObjects(region)
-            this.onClick();
+            this.gridRender();
             this.renderParkObjectsInGrid(this.parkObjectController.getObjectsOnGrid(region.id))
+            this.lockGridItems();
         });
 
         this.div.appendChild(btn);
