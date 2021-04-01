@@ -68,11 +68,10 @@ export class GridView {
                         this.gridController.resetPlacement(objectid);
                         dropzone.append(this.dragged);
                     }
-                } else if (this.gridController.place(objectid, dropzone) == true){
+                } else if (this.gridController.place(objectid, dropzone) == true) {
                     dropzone.append(this.dragged);
                 }
             }
         }, false);
     }
-
 }

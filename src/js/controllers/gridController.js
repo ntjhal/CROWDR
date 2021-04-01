@@ -12,6 +12,8 @@ export class GridController {
     }
 
     place(viewObjID, dropzone) {
+        let grid = document.getElementById('grid');
+
         //get localstorage object
         let object = this.parkObjectController.getObject(this.regionController.currentRegionID, viewObjID);
 
@@ -27,8 +29,8 @@ export class GridController {
         //check if item wont overlap other items.
         for (let x = dropX; x < dropX + object.width; x++) {
             for (let y = dropY; y < dropY + object.height; y++) {
-                console.log(this.parkObjectController.findObjectOnPos(this.regionController.currentRegionID, x, y) != null)
-                if (this.parkObjectController.findObjectOnPos(this.regionController.currentRegionID, x, y) != null) {
+                if (this.parkObjectController.findObjectOnPos(this.regionController.currentRegionID, x, y) != null ||
+                    grid.querySelector(`div[id="{${x}-${y}}-locked"]`) != null) {
                     return false;
                 }
             }
@@ -38,10 +40,26 @@ export class GridController {
         object.x = dropX;
         object.y = dropY;
 
+        this.lockGridSquares(object.x, object.y, object)
+
         this.parkObjectController.updateObject(this.regionController.currentRegionID, object)
 
         //return wether place was succesful or not. 
         return true;
+    }
+
+    lockGridSquares(lockX, lockY, object) {
+        let grid = document.getElementById('grid');
+
+        for (let x = lockX; x < lockX + object.width; x++) {
+            for (let y = lockY; y < lockY + object.height; y++) {
+                let griditem = grid.querySelector(`div[id="{${x}-${y}}"]`);
+
+                if (griditem != null) {
+                    griditem.id = `${griditem.id}-locked`;
+                }
+            }
+        }
     }
 
     resetPlacement(viewObjID) {
