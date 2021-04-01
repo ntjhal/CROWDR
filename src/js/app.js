@@ -4,19 +4,16 @@ import { WeatherModel } from './models/weatherModel.js';
 
 import { VisitorController } from './controllers/visitorController.js';
 import { VisitorView } from './views/visitorView.js';
+
 import { RegionController } from './controllers/regionController.js';
 import { RegionView } from './views/regionView.js';
-import { ParkObject } from './models/parkObjectModel.js';
-import { ParkObjectDetailView } from './views/parkObjectView.js'
 import { ParkObjectController } from './controllers/parkObjectController.js';
 
 import { ConfigForm, ConfigQuestion } from './models/configForm.js';
 import { ConfigFormView } from './views/configFormView.js';
 import { ConfigFormController } from './controllers/configFormController.js';
 
-import { GridView } from './views/gridView.js';
 import { GridController } from './controllers/gridController.js';
-
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -26,7 +23,6 @@ document.getElementById('createmode').onclick = () => {
 document.getElementById('simulatemode').onclick = () => {
     document.getElementById('simulate').classList.remove('hidden');
     document.getElementById('create').classList.add('hidden');
-
 }
 
 // const canvas = document.querySelector('canvas');
@@ -71,7 +67,7 @@ visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
 
-//create a region;
+// create a region
 const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
@@ -108,8 +104,6 @@ const q9 = new ConfigQuestion('bins', 'How many waste bins?', 'number', {
 cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
-//Render the basic grid
+// render the basic grid
 const gc = new GridController(poc, rv); //parameter = parkobjectcontroller
 gc.init();
-
-

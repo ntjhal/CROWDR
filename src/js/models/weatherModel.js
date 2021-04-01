@@ -10,9 +10,7 @@ export class WeatherModel {
                 
                 return res;
             })
-            .then(res => {
-                return res.json();
-            })
+            .then(res => res.json())
             .catch(e => {
                 throw e;
             });

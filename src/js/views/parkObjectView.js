@@ -5,7 +5,6 @@ export class ParkObjectDetailView {
 
     //TODO verbeteren van deze code, veel dubbele code
     renderDetails(regionID, object) {
-
         let settingspanel = document.getElementById('settingspanel');
         settingspanel.innerHTML = '<h2>Object details</h2><br>' +
         `<p><strong>ID:</strong> ${object.id} </p>` +
@@ -153,7 +152,5 @@ export class ParkObjectDetailView {
             field.appendChild(input);
             settingspanel.appendChild(field);
         }
-    }
-
-    
+    }    
 }
