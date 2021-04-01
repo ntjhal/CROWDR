@@ -3,6 +3,7 @@ import { GridView } from "../views/gridView.js";
 export class GridController {
     constructor(parkObjectController, regionView) {
         this.parkObjectController = parkObjectController;
+        console.log(parkObjectController)
         this.regionController = parkObjectController.regioncontroller;
         this.gridView = new GridView(this, regionView);
     }
@@ -40,9 +41,10 @@ export class GridController {
         object.x = dropX;
         object.y = dropY;
 
-        this.lockGridSquares(object.x, object.y, object)
-
+        //this.lockGridSquares(object.x, object.y, object)
         this.parkObjectController.updateObject(this.regionController.currentRegionID, object)
+
+        this.lockGridSquaresFullGrid(this.parkObjectController.getObjectsOnGrid(this.regionController.currentRegionID))
 
         //return wether place was succesful or not. 
         return true;
@@ -59,6 +61,22 @@ export class GridController {
                     griditem.id = `${griditem.id}-locked`;
                 }
             }
+        }
+    }
+
+    lockGridSquaresFullGrid() {
+        let gridObjects = this.parkObjectController.getObjectsOnGrid(this.regionController.currentRegionID);
+        let griditems = document.querySelectorAll('#grid > div[id$=locked]');
+
+        for (let griditem of griditems) {
+            let str = griditem.id;
+            str = str.replace(/-locked/g, '');
+
+            griditem.id = str;
+        }
+
+        for (let object of gridObjects) {
+            this.lockGridSquares(object.x, object.y, object);
         }
     }
 
