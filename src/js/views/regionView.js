@@ -28,6 +28,30 @@ export class RegionView {
         });
 
         this.div.appendChild(btn);
+
+        // render a 'lock' button
+        let lock = document.createElement('button');
+        lock.textContent = 'Lock';
+        lock.addEventListener('click', (e) => {
+            this.lock();
+            lock.disabled = true;
+            lock.classList.add('disabled');
+        });
+
+        let infoDiv = document.querySelector('#regioninfo');
+        infoDiv.appendChild(lock);
+    }
+
+    lock() {
+        let items = document.querySelectorAll('#grid .griditem');
+
+        items.forEach(item => {
+            // loop through all items on the grid
+            item.childNodes.forEach(child => {
+                // set draggable to false
+                child.draggable = false;
+            });
+        });
     }
 
     renderParkObjects(region) {
@@ -37,7 +61,6 @@ export class RegionView {
         const typeArray = region.parkObjects.map(x => x.type);
         let uniqueTypes = typeArray.filter((item, i, ar) => ar.indexOf(item) === i);
 
-        
         for (let type of uniqueTypes) {
             let typeDiv = document.createElement('div');
             typeDiv.id = `${type}-holder`;
@@ -70,7 +93,6 @@ export class RegionView {
                 object.appendChild(image);
                 typeDiv.appendChild(object);
                 typeDiv.classList.add('droppable')
-                
             }
 
             dragelements.appendChild(typeDiv);
