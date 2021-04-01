@@ -5,6 +5,22 @@ export class RegionView {
     constructor(div) {
         this.div = div;
         this.onClick = null;
+
+        this.init();
+    }
+
+    init() {
+        // render a 'lock' button
+        let lock = document.createElement('button');
+        lock.textContent = 'Lock';
+        lock.addEventListener('click', (e) => {
+            this.lock();
+            lock.disabled = true;
+            lock.classList.add('disabled');
+        });
+
+        let infoDiv = document.querySelector('#regioninfo');
+        infoDiv.appendChild(lock);
     }
 
     setParkObjectController(poc) {
@@ -28,22 +44,11 @@ export class RegionView {
         });
 
         this.div.appendChild(btn);
-
-        // render a 'lock' button
-        let lock = document.createElement('button');
-        lock.textContent = 'Lock';
-        lock.addEventListener('click', (e) => {
-            this.lock();
-            lock.disabled = true;
-            lock.classList.add('disabled');
-        });
-
-        let infoDiv = document.querySelector('#regioninfo');
-        infoDiv.appendChild(lock);
     }
 
     lock() {
         let items = document.querySelectorAll('#grid .griditem');
+        let elements = document.querySelector('#dragelements');
 
         items.forEach(item => {
             // loop through all items on the grid
@@ -51,6 +56,14 @@ export class RegionView {
                 // set draggable to false
                 child.draggable = false;
             });
+        });
+
+        elements.childNodes.forEach(child => {
+            child.childNodes.forEach(elem => {
+                elem.disabled = true;
+                elem.draggable = false;
+                elem.classList.add('disabled');
+            })
         });
     }
 
