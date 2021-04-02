@@ -1,8 +1,7 @@
 export class VisitorModel {
     constructor() {
-
     }
-    
+
     async generateInfo(groupSize) {
         return fetch("https://randomuser.me/api/?results="+groupSize)
             .then(res => res.json())
