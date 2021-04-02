@@ -61,56 +61,61 @@ export class ConfigQuestion {
             validationResult = this.validator.ifTent(this.rules.ifTent, answer);
         }
 
-        if (this.rules.percentOfSpace != undefined) {
+        if (this.type === 'number') {
             const total = 15 * 15;
             let occupied = 0;
             
             // parse json
             answers = JSON.parse(answers);
-
+    
             // calculate space left
-            for (const answer in answers) {
-                switch (answer) {
+            for (const key in answers) {
+                switch (key) {
                     case undefined:
                         break;
-
+    
                     case 'tents':
-                        occupied += 3 * 3 * answers[answer];
+                        occupied += 3 * 3 * answers[key];
                         break;
-
+    
                     case 'eating_stalls':
-                        occupied += 1 * 1 * answers[answer];
+                        occupied += 1 * 1 * answers[key];
                         break;
-
+    
                     case 'drinking_stalls':
-                        occupied += 1 * 2 * answers[answer];
+                        occupied += 1 * 2 * answers[key];
                         break;
-
+    
                     case 'tree_high':
-                        occupied += 1 * 1 * answers[answer];
+                        occupied += 1 * 1 * answers[key];
                         break;
-
+    
                     case 'tree_wide':
-                        occupied += 2 * 1 * answers[answer];
+                        occupied += 2 * 1 * answers[key];
                         break;
-
+    
                     case 'tree_shadow':
-                        occupied += 3 * 3 * answers[answer];
+                        occupied += 3 * 3 * answers[key];
                         break;
-
+    
                     case 'toilet_stalls':
-                        occupied += 1 * 3 * answers[answer];
+                        occupied += 1 * 3 * answers[key];
                         break;
                 
                     default:
                         break;
                 }
             }
-
+    
             // subtract occupied space from total
             const space = total - occupied;
 
-            validationResult = this.validator.percentOfSpace(space, this.rules.percentOfSpace, answer);
+            if (this.rules.percentOfSpace != undefined) {
+                validationResult = this.validator.percentOfSpace(space, this.rules.percentOfSpace, answer);
+            }
+
+            // check if the placement of the amount of objects is possible at all
+            validationResult = this.validator.enoughSpaceLeft(space, answer);
         }
 
         return validationResult;
