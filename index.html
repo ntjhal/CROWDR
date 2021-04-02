@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="src/css/app.css">
 
-    <script type="module" src="src/js/app.js"></script>
+    <script type="module" src="dist/bundle.js"></script>
 </head>
 <body>
     <h1>CROWDR</h1>
@@ -19,57 +19,59 @@
         <button id="simulatemode">Simulate</button>
     </div>
 
-    <div id="main" class="flex space-between">
-        <div class="panel sidepanel">
-            <div id="gridform" class="holder"></div>
-            <div id="dragelements" class="holder"></div>
-        </div>
-
-        <div class="panel centrepanel">
-            <div id="terrain" class="holder flex space-between">
-                <div id="terrainbuttons">
-                    <button>Terrain 1</button>
-                </div>
-            </div>
-
-            <div class="canvas">
-                <canvas></canvas>
-            </div>
-        </div>
-
-        <div class="panel sidepanel">
-            <div id="settingspanel" class="holder">
-                <div id="configForm">
-                    <h2>Configuration</h2>
-            
-                    <form name="configuration"></form>
-                </div>
-            </div>
-
-            <div id="visitor" class="holder">
-                <h2>Visitor</h2>
+    <div id="main">
+        <div id='create'>
+            <div class="flex space-evenly">
+                <div id="sidepanel">
+                    <div id="configForm" class="holder">
+                        <h2>Configuration</h2>
+                        <form name="configuration"></form>
+                    </div>
         
-                <button type="button">Show new</button>
-        
-                <p id="name"></p>
-                <p id="gender"></p>
-                <p id="city"></p>
-            </div>
-
-            <div id="weather" class="holder">
-                <h2>Weather</h2>
-
-                <div class="field horizontal">
-                    <input type="text">
-                    <button type="button">Show</button>
+                    <div id="dragelements" class="holder"></div>
                 </div>
+                <div id="centrepanel">
+                    <div id="regioninfo" class="holder flex space-between">
+                        <div id="regionbuttons"></div>
+                    </div>
+                    <div id="grid"></div>
+                </div>
+                <div id="sidepanel">
+                    <div id="settingspanel" class="holder">
+                        <h2>Object details</h2>
+                    </div>
 
-                <div>
-                    <p id="city"></p>
-                    <p id="temp"></p>
+                    <div id="extra" class="holder">
+                        <div id="visitor">
+                            <h2>Visitor</h2>
+                    
+                            <button type="button">Show new</button>
+                    
+                            <p id="name"></p>
+                            <p id="gender"></p>
+                            <p id="city"></p>
+                        </div>
+
+                        <div id="weather">
+                            <div>
+                                <h2>Weather</h2>
+                                <div class="field horizontal">
+                                    <input type="text">
+                                    <button type="button">Toon</button>
+                                </div>
+                            </div>
+                            <div>
+                                <p id="city"></p>
+                                <p id="temp"></p>
+                                <div id="icon"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div id="simulate" class="hidden"></div>
     </div>
 </body>
 </html>

@@ -5,17 +5,23 @@ export class WeatherController {
     }
 
     getWeather(city) {
-        this.weatherModel.getWeather(city)
-            .then(w => {  
-                const data = {
-                    city: city,
-                    temp: Math.floor(w.main.temp)
-                };
-        
-                this.weatherView.render(data);
+        return this.weatherModel.getWeather(city)
+            .then(data => {
+                if (data === undefined) {
+                    throw 'Failed to fetch weather data!';
+                }
+
+                return data;
+            })
+            .then(data => {  
+                this.weatherView.render({
+                    city: city.charAt(0).toUpperCase() + city.slice(1),
+                    temp: Math.floor(data.main.temp),
+                    icon: data.weather[0].icon
+                });
             })
             .catch(e => {
-                alert('City not found!');
+                alert(`Error: ${e}`)
             });
-        }
+    }
 }

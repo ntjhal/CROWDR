@@ -9,8 +9,14 @@ export class VisitorController {
         this.visitorModel = new VisitorModel();
 
         this.visitorModel.generateInfo()
+            .then(data => {
+                if (data === undefined) {
+                    throw 'Failed to fetch visitor data!';
+                }
+
+                return data;
+            })
             .then(v => {  
-                
                 let r = v.results[0];
                 
                 const data = {
@@ -20,12 +26,10 @@ export class VisitorController {
                     hometown: r.location.city
                 };
 
-                console.log(this.visitorView);
-
                 this.visitorView.render(data);
             })
             .catch(e => {
-                alert('Visitor not found!');
+                alert(`Error: ${e}`)
             });
         }
 }

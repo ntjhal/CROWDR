@@ -1,9 +1,11 @@
 import { Validator, ValidationResult } from "./validator.js";
 
 export class ConfigForm {
-    questions = [];
-    answers = [];
-    current = 0;
+    constructor() {
+        this.questions = [];
+        this.answers = [];
+        this.current = 0;
+    }
 
     addQuestions(questions) {
         questions.forEach(q => {
@@ -53,6 +55,7 @@ export class ConfigQuestion {
 
         if (this.rules.percentOfSpace) {
             // TODO: get space left
+            let space = 2
             validationResult = this.validator.percentOfSpace(space, this.rules.percentOfSpace, answer);
         }
 
