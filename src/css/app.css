@@ -236,10 +236,10 @@ input:focus, button:focus {
     border-radius: 5px;
 }
 
-#grid {
+#sim_grid, #grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    background-color: white;
+    background-color: forestgreen;
     width: 750px;
     height: 750px;
     margin: 1em 0;

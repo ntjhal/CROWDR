@@ -1,18 +1,13 @@
 export class GridView {
 
-    constructor(controller, regionView) {
-        this.gridController = controller;
-        this.regionView = regionView;
-        this.regionView.gridRender = this.renderGrid.bind(this);
-        this.regionView.lockGridItems = this.lockGrid.bind(this)
+    constructor() {
+        this.lockSquares = null;
+        this.placeObj = null;
+        this.resetPos = null
 
         this.dragged;
         this.width = 15;
         this.height = 15;
-    }
-    
-    lockGrid() {
-        this.gridController.lockGridSquaresFullGrid();
     }
 
     renderGrid() {
@@ -73,10 +68,10 @@ export class GridView {
                     let objecttype = this.dragged.id.split('-')[0];
 
                     if (holdertype == objecttype) {
-                        this.gridController.resetPlacement(objectid);
+                        this.resetPos(objectid);
                         dropzone.append(this.dragged);
                     }
-                } else if (this.gridController.place(objectid, dropzone) == true) {
+                } else if (this.placeObj(objectid, dropzone) == true) {
                     dropzone.append(this.dragged);
                 }
             }

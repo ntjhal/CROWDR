@@ -14,7 +14,8 @@ import { ConfigFormView } from './views/configFormView.js';
 import { ConfigFormController } from './controllers/configFormController.js';
 
 import { GridController } from './controllers/gridController.js';
-import { SimulationCanvasView } from './views/simulationCanvasView.js';
+import { GridView } from './views/gridView.js';
+import { SimulationFieldView } from './views/simulationFieldView.js';
 import { SimulationButtonsView } from './views/simulationButtonsView.js';
 import { SimulationEntranceView } from './views/simulationEntranceView.js';
 
@@ -27,22 +28,6 @@ document.getElementById('simulatemode').onclick = () => {
     document.getElementById('simulate').classList.remove('hidden');
     document.getElementById('create').classList.add('hidden');
 }
-
-// const canvas = document.querySelector('canvas');
-// const c = canvas.getContext('2d');
-// canvas.width = 750;
-// canvas.height = 750;
-// //One grid position is 50 x 50 
-
-// // draw German flag
-// c.fillStyle = 'black';
-// c.fillRect(10, 10, 480, 100);
-
-// c.fillStyle = 'red';
-// c.fillRect(10, 110, 480, 100);
-
-// c.fillStyle = 'yellow';
-// c.fillRect(10, 210, 480, 100);
 
 // show weather
 const weatherDiv = document.querySelector('#weather');
@@ -72,10 +57,10 @@ visitorBtn.addEventListener('click', (e) => {
 
 //simulationButtons
 
-let canvas = document.querySelector('#canvas');
+let simulationGrid = document.querySelector('sim_grid');
 const entrance = new SimulationEntranceView();
-const canv = new SimulationCanvasView(canvas, 750, 750);
-const simButtons = new SimulationButtonsView(canv);
+const field = new SimulationFieldView(simulationGrid);
+const simButtons = new SimulationButtonsView(field);
 
 // create a region
 const regionButtons = document.querySelector('#regionbuttons');
@@ -115,11 +100,13 @@ cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
 // render the basic grid
-const gc = new GridController(poc, rv); //parameter = parkobjectcontroller
-gc.init();
+const gv = new GridView();
+const gc = new GridController(poc, rv, gv); //parameter = parkobjectcontroller
+gc.render();
 
 
 //Simulation
+
 
 
 

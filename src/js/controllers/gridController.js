@@ -1,13 +1,18 @@
-import { GridView } from "../views/gridView.js";
-
 export class GridController {
-    constructor(parkObjectController, regionView) {
+    constructor(parkObjectController, regionView, gridView) {
         this.parkObjectController = parkObjectController;
         this.regionController = parkObjectController.regioncontroller;
-        this.gridView = new GridView(this, regionView);
+        
+        this.gridView = gridView;
+        this.gridView.placeObj = this.place.bind(this);
+        this.gridView.resetPos = this.resetPlacement.bind(this);
+
+        this.regionView = regionView;
+        this.regionView.gridRender = this.render.bind(this);
+        this.regionView.lockGridItems = this.lockGridSquaresFullGrid.bind(this)
     }
 
-    init() {
+    render() {
         this.gridView.renderGrid();
     }
 
