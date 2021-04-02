@@ -34,7 +34,7 @@ export class Validator {
     }
 
     percentOfSpace(space, percent, value) {
-        const maximum = percent * space;
+        const maximum = Math.floor(Math.abs(percent * space));
 
         if (value > maximum) {
             return new ValidationResult(false, `Value too high, maximum is ${maximum}`);

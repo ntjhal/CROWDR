@@ -62,8 +62,54 @@ export class ConfigQuestion {
         }
 
         if (this.rules.percentOfSpace != undefined) {
-            // TODO: get space left
-            let space = 2
+            const total = 15 * 15;
+            let occupied = 0;
+            
+            // parse json
+            answers = JSON.parse(answers);
+
+            // calculate space left
+            for (const answer in answers) {
+                switch (answer) {
+                    case undefined:
+                        break;
+
+                    case 'tents':
+                        occupied += 3 * 3 * answers[answer];
+                        break;
+
+                    case 'eating_stalls':
+                        occupied += 1 * 1 * answers[answer];
+                        break;
+
+                    case 'drinking_stalls':
+                        occupied += 1 * 2 * answers[answer];
+                        break;
+
+                    case 'tree_high':
+                        occupied += 1 * 1 * answers[answer];
+                        break;
+
+                    case 'tree_wide':
+                        occupied += 2 * 1 * answers[answer];
+                        break;
+
+                    case 'tree_shadow':
+                        occupied += 3 * 3 * answers[answer];
+                        break;
+
+                    case 'toilet_stalls':
+                        occupied += 1 * 3 * answers[answer];
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+
+            // subtract occupied space from total
+            const space = total - occupied;
+
             validationResult = this.validator.percentOfSpace(space, this.rules.percentOfSpace, answer);
         }
 
