@@ -43,6 +43,15 @@ export class Validator {
         // all checks passed, valid
         return new ValidationResult();
     }
+    
+    enoughSpaceLeft(space, value) {
+        if (value > space) {
+            return new ValidationResult(false, `Not enough room for this amount of objects. Space left: ${space}`);
+        }
+        
+        // all checks passed, valid
+        return new ValidationResult();
+    }
 }
 
 export class ValidationResult {

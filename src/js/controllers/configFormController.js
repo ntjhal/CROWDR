@@ -13,6 +13,9 @@ export class ConfigFormController {
         // render the reset button
         this.view.renderReset();
 
+        // clear the storage
+        localStorage.removeItem('answers');
+
         // show the first question
         this.nextQuestion();
     }
