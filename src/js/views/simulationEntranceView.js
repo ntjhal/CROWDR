@@ -1,15 +1,43 @@
 export class SimulationEntranceView {
     constructor() {
-        this.canvas = document.querySelector('#entranceCanvas');
-        this.canvas.width = 300;
-
-        this.amountOfLines = 3;
-
-        this.renderEntrance();
+        this.init();
     }
 
     init() {
-        
+        let entranceholder = document.querySelector('#entrance')
+
+        this.canvas = document.querySelector('#entranceCanvas');
+        this.canvas.width = 300;
+
+        let input = document.createElement('input');
+        input.type = 'number';
+        input.min = 0;
+        input.value = 3;
+        input.id = 'linesInput'
+        input.classList.add('input');
+
+        input.onchange = () => {
+            object.maxVisitors = input.value;
+            this.parkObjectController.updateObject(regionID, object);
+            this.renderDetails(regionID, object);
+        }
+
+        let btn = document.createElement('button');
+        btn.textContent = 'Start Simulation';
+        btn.addEventListener('click', (e) => {
+            this.onStart();
+        })
+
+        let beforeNode = entranceholder.querySelector('div');
+        entranceholder.insertBefore(input, beforeNode);
+        entranceholder.insertBefore(btn, beforeNode);
+    }
+
+    onStart() {
+        this.amountOfLines = document.querySelector('#linesInput').value;
+        this.renderEntrance();
+
+        //TODO startsimulation
     }
 
     renderEntrance() {
