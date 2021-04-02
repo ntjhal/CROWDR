@@ -18,7 +18,6 @@ export class SimulationCanvasView {
             let image = document.createElement('img');
             image.width = 50 * po.width;
             image.height = 50 * po.height;
-            console.log(image);
 
             image.onload = function () {
                 ctx.drawImage(image, (po.x - 1) * 50, (po.y - 1) * 50), (50 * po.width) ,(50 * po.height);

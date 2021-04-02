@@ -16,6 +16,7 @@ import { ConfigFormController } from './controllers/configFormController.js';
 import { GridController } from './controllers/gridController.js';
 import { SimulationCanvasView } from './views/simulationCanvasView.js';
 import { SimulationButtonsView } from './views/simulationButtonsView.js';
+import { SimulationEntranceView } from './views/simulationEntranceView.js';
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -72,6 +73,7 @@ visitorBtn.addEventListener('click', (e) => {
 //simulationButtons
 
 let canvas = document.querySelector('#canvas');
+const entrance = new SimulationEntranceView();
 const canv = new SimulationCanvasView(canvas, 750, 750);
 const simButtons = new SimulationButtonsView(canv);
 

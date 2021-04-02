@@ -267,6 +267,6 @@ input:focus, button:focus {
     cursor: not-allowed;
 }
 
-#canvas {
+canvas {
     background-color: forestgreen;
 }
