@@ -72,7 +72,7 @@ export class SimulationEntranceView {
             
             for (let j = 0; j < queue[i].groupsize; j++) {
                 ctx.beginPath();
-                ctx.fillStyle = "blue";
+                ctx.fillStyle = "pink";
                 ctx.arc(75 + i * (queueSpace / 7), (40 - (j * 10)) + (75 * index), circleR, 0, 2 * Math.PI);
                 ctx.fill();
             }
@@ -85,7 +85,7 @@ export class SimulationEntranceView {
 
         for (let j = 0; j < group.groupsize; j++) {
             ctx.beginPath();
-            ctx.fillStyle = "blue";
+            ctx.fillStyle = "pink";
             ctx.arc(20, (40 - (j * 10)) + (75 * index), circleR, 0, 2 * Math.PI);
             ctx.fill();
         }

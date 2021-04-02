@@ -21,7 +21,7 @@ export class SimulationController {
             this.stopIntervals();
         //interval add to queue
         for (let i = 0; i < queues.length; i++) {
-            var interval = setInterval(this.addToQueue, 1000, i, this.visitorController, this.entranceView);
+            var interval = setInterval(this.addToQueue, 200, i, this.visitorController, this.entranceView);
             this.queueIntervals.push(interval);
         }
         //interval enter parc
@@ -32,7 +32,7 @@ export class SimulationController {
             }
         }
         
-        setTimeout(enterInterval, 6900, this.enterIntervals);
+        setTimeout(enterInterval, 2000, this.enterIntervals);
     }
 
     initQueue(amountOfLines) {
