@@ -14,6 +14,8 @@ import { ConfigFormView } from './views/configFormView.js';
 import { ConfigFormController } from './controllers/configFormController.js';
 
 import { GridController } from './controllers/gridController.js';
+import { SimulationCanvasView } from './views/simulationCanvasView.js';
+import { SimulationButtonsView } from './views/simulationButtonsView.js';
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -67,11 +69,17 @@ visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
 
+//simulationButtons
+
+let canvas = document.querySelector('#canvas');
+const canv = new SimulationCanvasView(canvas, 750, 750);
+const simButtons = new SimulationButtonsView(canv);
+
 // create a region
 const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
-const rc = new RegionController(rv);
+const rc = new RegionController(rv, simButtons);
 const poc = new ParkObjectController(rc);
 rv.setParkObjectController(poc);
 rc.drawRegions();
@@ -107,3 +115,9 @@ cfc.init();
 // render the basic grid
 const gc = new GridController(poc, rv); //parameter = parkobjectcontroller
 gc.init();
+
+
+//Simulation
+
+
+

@@ -19,8 +19,8 @@ export class GridView {
         let grid = document.getElementById('grid');
         grid.innerHTML = "";
 
-        for(let x = 1; x <= 15; x++) {
-            for(let y = 1; y <= 15; y++) {
+        for(let y = 1; y <= 15; y++) {
+            for(let x = 1; x <= 15; x++) {
                 let element = document.createElement('div');
                 element.classList.add('griditem', 'droppable');
                 element.id = `{${x}-${y}}`;

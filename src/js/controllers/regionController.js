@@ -1,8 +1,11 @@
 import { Region } from "../models/regionModel.js";
 
 export class RegionController {
-    constructor(view) {
+    constructor(view, simButtons) {
         this.regionview = view;
+        this.simButtons = simButtons;
+        this.simButtons.setCurrent = this.setSimRegion.bind(this);
+        this.simButtons.getRegion = this.getRegion.bind(this);
     }
 
     createRegion() {
@@ -72,6 +75,11 @@ export class RegionController {
         return regionsArray.filter(r => r.id === id)[0];
     }
 
+    setSimRegion(value) {
+        this.simCurrentRegionID = value;
+        return this.getRegion(this.simCurrentRegionID);
+    }
+
     drawRegions() {
         let regions = this.getRegions();
         let regionButtons = document.querySelector('#regionbuttons');
@@ -79,6 +87,7 @@ export class RegionController {
         
         for(let region of regions) {
             this.regionview.render(region);
+            this.simButtons.render(region);
         }
     }
 }

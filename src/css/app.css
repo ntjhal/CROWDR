@@ -118,7 +118,11 @@ input:focus, button:focus {
     justify-content: space-evenly;
 }
 
-#sidepanel {
+.flex-center {
+    justify-content: center;
+}
+
+.sidepanel {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -126,7 +130,7 @@ input:focus, button:focus {
     height: 850px;
 }
 
-#centrepanel {
+.centrepanel {
     width: 750px;
     height: 850px;
     margin: 0 1em;
@@ -140,7 +144,7 @@ input:focus, button:focus {
     padding: 1rem;
 }
 
-#settingspanel {
+#settingspanel, #sim_detailspanel {
     padding: 1em;
     height: 60%;
 }
@@ -203,7 +207,7 @@ input:focus, button:focus {
     height: 100%;
 }
 
-#regionbuttons {
+#regionbuttons, #sim_regionbuttons {
     padding: 0.5em;
     height: 50px;
     width: 60%;
@@ -261,4 +265,8 @@ input:focus, button:focus {
 
 .disabled:hover {
     cursor: not-allowed;
+}
+
+#canvas {
+    background-color: forestgreen;
 }

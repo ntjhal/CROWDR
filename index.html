@@ -22,7 +22,7 @@
     <div id="main">
         <div id='create'>
             <div class="flex space-evenly">
-                <div id="sidepanel">
+                <div class="sidepanel">
                     <div id="configForm" class="holder">
                         <h2>Configuration</h2>
                         <form name="configuration"></form>
@@ -30,13 +30,13 @@
         
                     <div id="dragelements" class="holder"></div>
                 </div>
-                <div id="centrepanel">
+                <div class="centrepanel">
                     <div id="regioninfo" class="holder flex space-between">
                         <div id="regionbuttons"></div>
                     </div>
                     <div id="grid"></div>
                 </div>
-                <div id="sidepanel">
+                <div class="sidepanel">
                     <div id="settingspanel" class="holder">
                         <h2>Object details</h2>
                     </div>
@@ -71,7 +71,21 @@
             </div>
         </div>
         
-        <div id="simulate" class="hidden"></div>
+        <div id="simulate" class="hidden">
+            <div class="flex flex-center">
+                <div class="centrepanel">
+                    <div id="sim_regioninfo" class="holder flex space-between">
+                        <div id="sim_regionbuttons"></div>
+                    </div>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="sidepanel">
+                    <div id="sim_detailspanel" class="holder">
+                        <h2>Details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
