@@ -58,7 +58,6 @@ export class ConfigFormController {
 
         // see if there is any
         if (question == null) {
-            // we are done here
             this.regioncontroller.createRegion();
             this.regioncontroller.drawRegions();
             this.onReset();

@@ -8,7 +8,7 @@ export class RegionController {
 
     createRegion() {
         //create a terrain, name must be unique
-        let regions = this.getRegions()
+        let regions = this.getRegions();
         let newID;
 
         if(regions.length >= 6) {
@@ -21,6 +21,8 @@ export class RegionController {
 
         let region = new Region(newID);
         this.saveRegion(region);
+
+        this.currentRegionID = region.id;
 
         return region;
     }
