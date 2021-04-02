@@ -55,21 +55,14 @@ visitorBtn.addEventListener('click', (e) => {
     vc.generateVisitor();
 });
 
-//simulationButtons
-
-let simulationGrid = document.querySelector('sim_grid');
-const entrance = new SimulationEntranceView();
-const field = new SimulationFieldView(simulationGrid);
-const simButtons = new SimulationButtonsView(field);
-
 // create a region
 const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
-const rc = new RegionController(rv, simButtons);
+const rc = new RegionController(rv);
 const poc = new ParkObjectController(rc);
 rv.setParkObjectController(poc);
-rc.drawRegions();
+rc.drawCreateRegions();
 
 // configuration form
 const cfm = new ConfigForm();
@@ -107,6 +100,13 @@ gc.render();
 
 //Simulation
 
-
-
-
+let simulationGrid = document.querySelector('sim_grid');
+const entrance = new SimulationEntranceView();
+const field = new SimulationFieldView(simulationGrid, poc);
+field.getObjectsOnGrid = poc.getObjectsOnGrid.bind(poc);
+field.getObject = poc.getObject.bind(poc);
+const simButtons = new SimulationButtonsView(field);
+simButtons.setCurrent = rc.setSimRegion.bind(rc);
+simButtons.getRegion = rc.getRegion.bind(rc);
+rc.renderSimBtn = simButtons.render.bind(simButtons);
+rc.drawSimRegions();
