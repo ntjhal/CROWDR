@@ -6,7 +6,10 @@ export class SimulationEntranceView {
         this.amountOfLines = 3;
 
         this.renderEntrance();
+    }
 
+    init() {
+        
     }
 
     renderEntrance() {
@@ -32,7 +35,7 @@ export class SimulationEntranceView {
         ctx.moveTo(55, 0);
         ctx.lineTo(55, this.canvas.height);
         ctx.stroke();
-
-
     }
+
+
 }

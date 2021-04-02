@@ -52,7 +52,7 @@ const vc = new VisitorController(vv);
 const visitorBtn = visitorDiv.querySelector('button')
 
 visitorBtn.addEventListener('click', (e) => {
-    vc.generateVisitor();
+    vc.generateVisitorGroup();
 });
 
 // create a region

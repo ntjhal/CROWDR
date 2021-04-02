@@ -1,14 +1,16 @@
-import { VisitorModel } from "../models/visitorModel.js";
+import { Visitor, VisitorGroup, VisitorModel } from "../models/visitorModel.js";
 
 export class VisitorController {
     constructor(visitorView) {
         this.visitorView = visitorView;
     }
 
-    generateVisitor() {
+    generateVisitorGroup() {
         this.visitorModel = new VisitorModel();
+        let newGroupSize = Math.floor(Math.random() * 4) + 1;
+        let newGroup = new VisitorGroup(newGroupSize); 
 
-        this.visitorModel.generateInfo()
+        this.visitorModel.generateInfo(newGroupSize)
             .then(data => {
                 if (data === undefined) {
                     throw 'Failed to fetch visitor data!';
@@ -16,20 +18,27 @@ export class VisitorController {
 
                 return data;
             })
-            .then(v => {  
-                let r = v.results[0];
+            .then(v => {                 
+                for(let r of v.results) {
+                    let visitor = new Visitor(
+                        r.name.first,
+                        r.name.last,
+                        r.gender,
+                        r.location.city,
+                        r.dob.age,
+                    );
                 
-                const data = {
-                    firstname: r.name.first,
-                    lastname: r.name.last,
-                    gender: r.gender,
-                    hometown: r.location.city
-                };
-
-                this.visitorView.render(data);
+                    newGroup.visitors.push(visitor);
+                }
+                
+                this.saveGroup(newGroup);
             })
             .catch(e => {
                 alert(`Error: ${e}`)
             });
-        }
+    }
+
+    saveGroup(group) {
+        console.log(group)
+    }
 }
