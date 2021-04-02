@@ -4,6 +4,8 @@ export class SimulationController {
         this.fieldView = field;
         this.entranceView = entrance;
         this.entranceView.startSimulation = this.startSimulation.bind(this);
+
+        this.queueIntervals = []; 
     }
 
     startSimulation(amountOfLines) {
@@ -15,8 +17,11 @@ export class SimulationController {
         }
 
         //interval add to queue
+        if (this.queueIntervals != null)
+            this.stopIntervals();
         for (let i = 0; i < queues.length; i++) {
-            setInterval(this.addToQueue, 1000, i, this.visitorController, this.entranceView);
+            var interval = setInterval(this.addToQueue, 1000, i, this.visitorController, this.entranceView);
+            this.queueIntervals.push(interval);
         }
         //interval enter parc
     }
@@ -47,6 +52,12 @@ export class SimulationController {
             queue.push(group);
             localStorage.setItem('queues', JSON.stringify(queues));
             entranceView.renderQueue(queue, index);
+        }
+    }
+
+    stopIntervals() {
+        for (let interval of this.queueIntervals) {
+            clearInterval(interval);
         }
     }
 
