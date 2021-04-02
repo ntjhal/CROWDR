@@ -3,6 +3,16 @@ export class Validator {
         this.answers = [];
     }
 
+    min(amount, value) {
+        // check if the given value is smaller than the minimum value
+        if (value < amount) {
+            return new ValidationResult(false, `Value too low, minimum is ${amount}!`);
+        }
+
+        // all checks passed, valid
+        return new ValidationResult();
+    }
+
     max(amount, value) {
         // check if the given value is higher than the maximum value
         if (value > amount) {
