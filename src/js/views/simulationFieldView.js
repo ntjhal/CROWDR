@@ -38,6 +38,7 @@ export class SimulationFieldView {
             if(po.imagesrc !== undefined) {  
                 image.src = po.imagesrc;
             }
+            image.draggable = false;
 
             object.addEventListener('click', (e) => {
                 this.renderParkObjectDetails(this.getObject(regionID, po.id));
