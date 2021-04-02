@@ -25,7 +25,7 @@ export class SimulationController {
             this.queueIntervals.push(interval);
         }
         //interval enter parc
-        let enterInterval = (enterIntervals) => {
+        let enterInterval = (enterIntervals) => { //TODO ALTER to recursive timeout to random between 1 / 3 seconds.
             for (let i = 0; i < queues.length; i++) {
                 var interval = setInterval(this.removeFromQueue, 1000, i, this.entranceView);
                 this.enterIntervals.push(interval);
