@@ -1,11 +1,9 @@
 import { Region } from "../models/regionModel.js";
 
 export class RegionController {
-    constructor(view, simButtons) {
+    constructor(view) {
         this.regionview = view;
-        this.simButtons = simButtons;
-        this.simButtons.setCurrent = this.setSimRegion.bind(this);
-        this.simButtons.getRegion = this.getRegion.bind(this);
+        this.renderSimBtn = null;
     }
 
     createRegion() {
@@ -82,14 +80,31 @@ export class RegionController {
         return this.getRegion(this.simCurrentRegionID);
     }
 
-    drawRegions() {
+    drawCreateRegions() {
         let regions = this.getRegions();
         let regionButtons = document.querySelector('#regionbuttons');
         regionButtons.innerHTML = "";
         
         for(let region of regions) {
             this.regionview.render(region);
-            this.simButtons.render(region);
         }
+    }
+
+    drawSimRegions() {
+        let regions = this.getRegions();
+        let regionButtons = document.querySelector('#sim_regionbuttons');
+        regionButtons.innerHTML = "";
+        
+        for(let region of regions) {
+            this.renderSimBtn(region);
+        }
+    }
+
+    getCurrentSimRegionID() {
+        return this.simCurrentRegionID;
+    }
+
+    getCurrentRegionID() {
+        return this.currentRegionID;
     }
 }

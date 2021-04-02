@@ -1,8 +1,8 @@
 export class SimulationButtonsView {
-    constructor(canvasView) {
+    constructor(fieldView) {
         this.div = document.querySelector('#sim_regionbuttons');
         this.setCurrent = null;
-        this.canvasView = canvasView;
+        this.fieldView = fieldView;
     }
 
     render(region) {
@@ -14,7 +14,7 @@ export class SimulationButtonsView {
             document.querySelector('#sim_detailspanel').innerHTML = "<h2>Details</h2>";
             
             let newRegion = this.setCurrent(region.id);
-            this.canvasView.renderCanvas(newRegion);
+            this.fieldView.renderField(newRegion);
         })
 
         this.div.append(btn);
