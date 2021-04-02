@@ -1,5 +1,6 @@
 export class SimulationEntranceView {
     constructor() {
+        this.startSimulation = null;
         this.init();
     }
 
@@ -16,12 +17,6 @@ export class SimulationEntranceView {
         input.id = 'linesInput'
         input.classList.add('input');
 
-        input.onchange = () => {
-            object.maxVisitors = input.value;
-            this.parkObjectController.updateObject(regionID, object);
-            this.renderDetails(regionID, object);
-        }
-
         let btn = document.createElement('button');
         btn.textContent = 'Start Simulation';
         btn.addEventListener('click', (e) => {
@@ -37,7 +32,8 @@ export class SimulationEntranceView {
         this.amountOfLines = document.querySelector('#linesInput').value;
         this.renderEntrance();
 
-        //TODO startsimulation
+        //TODO startsimulation'
+        this.startSimulation(this.amountOfLines);
     }
 
     renderEntrance() {
@@ -63,6 +59,22 @@ export class SimulationEntranceView {
         ctx.moveTo(55, 0);
         ctx.lineTo(55, this.canvas.height);
         ctx.stroke();
+    }
+
+    renderQueue(queue, index) {
+        let ctx = this.canvas.getContext('2d');
+        let queueSpace = this.canvas.width - 75;
+        let circleR = 5
+
+        for (let i = 0; i < queue.length; i++) {
+            
+            for (let j = 0; j < queue[i].groupsize; j++) {
+                ctx.beginPath();
+                ctx.fillStyle = "blue";
+                ctx.arc(75 + i * (queueSpace / 7), (40 - (j * 10)) + (75 * index), circleR, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
     }
 
 

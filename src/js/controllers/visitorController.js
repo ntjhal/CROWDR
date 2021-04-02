@@ -1,12 +1,11 @@
 import { Visitor, VisitorGroup, VisitorModel } from "../models/visitorModel.js";
 
 export class VisitorController {
-    constructor(visitorView) {
-        this.visitorView = visitorView;
+    constructor() {
+        this.visitorModel = new VisitorModel();
     }
 
     generateVisitorGroup() {
-        this.visitorModel = new VisitorModel();
         let newGroupSize = Math.floor(Math.random() * 4) + 1;
         let newGroup = new VisitorGroup(newGroupSize); 
 
@@ -31,11 +30,12 @@ export class VisitorController {
                     newGroup.visitors.push(visitor);
                 }
                 
-                this.saveGroup(newGroup);
             })
             .catch(e => {
                 alert(`Error: ${e}`)
             });
+        
+        return newGroup;
     }
 
     saveGroup(group) {
