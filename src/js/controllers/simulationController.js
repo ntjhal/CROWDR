@@ -21,50 +21,45 @@ export class SimulationController {
         this.initField();
 
         let queues = [];
-        if(localStorage.queues !== undefined) {
-            queues = JSON.parse(localStorage.queues)
+        for (let i = 1; i <= amountOfLines; i++) {
+            if(localStorage.getItem(`queue${i}`) != null) {
+                queues.push(JSON.parse(localStorage.getItem(`queue${i}`)));
+            }
         }
+
 
         if (this.queueIntervals != null || this.enterIntervals != null)
             this.stopIntervals();
         //interval add to queue
         for (let i = 0; i < queues.length; i++) {
-            var interval = setInterval(this.addToQueue, 200, i, this.visitorController, this.entranceView);
+            var interval = setInterval(this.addToQueue, 500, i + 1, this);
+
             this.queueIntervals.push(interval);
         }
         //interval enter parc (acutally a recursive setTimeout function)
         for (let i = 0; i < queues.length; i++) {
             let enterInterval = () => {
-                this.removeFromQueue(i, this.entranceView);
+                this.removeFromQueue(i+1, this.entranceView);
                 
                 let seconds = Math.floor(Math.random() * 3) + 1;
                 this.enterIntervals[i] = setTimeout(enterInterval, seconds * 1000);
             }
 
-            enterInterval.call();
+            setTimeout(enterInterval, 1500);
         }
     }
 
     initQueue(amountOfLines) {
-        let queues = [];
-
-        for (let i = 0; i < amountOfLines; i++) {
+        for (let i = 1; i <= amountOfLines; i++) {
             let queue = [];
-            queues.push(queue);
+            localStorage.setItem(`queue${i}`, JSON.stringify(queue));
         }
-
-        localStorage.setItem('queues', JSON.stringify(queues));
     }
 
     initField() {
         let regions = this.regionController.getRegions(); 
         let sim_squares = [];
         let lockedSquares = [];
-
-        function findCoords(x, y) {
-            return lockedSquares.x == x && lockedSquares.y == y;
-        } 
-        
 
         for (let region of regions) {
             let squares = [];
@@ -101,45 +96,71 @@ export class SimulationController {
         return coords;
     }
 
-    addToQueue(index, visitorController, entranceView) {
-        const groupPerLine = 7; 
+    addToQueue(index, controller) {
+        const groupPerLine = 7;
         
-        let queues = [];
         let queue = [];
-        if(localStorage.queues !== undefined) {
-            queues = JSON.parse(localStorage.queues);
-            queue = queues[index];
-        }
 
-        if (queue.length < groupPerLine) {
-            let group = visitorController.generateVisitorGroup();
-            queue.push(group);
-            localStorage.setItem('queues', JSON.stringify(queues));
-            entranceView.renderQueue(queue, index);
-        }
+        controller.getData(controller).then(group => {
+            if (localStorage.getItem(`queue${index}`) !== undefined) {
+                queue = JSON.parse(localStorage.getItem(`queue${index}`));
+            }
+            if (queue.length < groupPerLine) {
+                queue.push(group);
+                localStorage.setItem(`queue${index}`, JSON.stringify(queue));
+                controller.entranceView.renderQueue(queue, index)
+            } 
+        });
     }
+
+    async getData(controller) {
+        return await controller.visitorController.generateVisitorGroup();
+    }
+    
 
     removeFromQueue(index, entranceView) {
         
-        let queues = [];
         let queue = [];
-        if (localStorage.queues !== undefined) {
-            queues = JSON.parse(localStorage.queues);
-            queue = queues[index];
+        if (localStorage.getItem(`queue${index}`) !== undefined) {
+            queue = JSON.parse(localStorage.getItem(`queue${index}`));
         }
 
         let enterGroup = queue[0];
 
         if (enterGroup != null) {
             if ((this.currentVisitors + enterGroup.groupsize) < this.maxVisitors) {
-                queues[index] = queue.slice(1, queue.length);
-                localStorage.setItem('queues', JSON.stringify(queues));
-            
-                this.currentVisitors += enterGroup.groupsize;
-                entranceView.renderEnterGroup(enterGroup, index);
+                if(this.tryEnter(enterGroup) == true) {
+                    queue = queue.slice(1, queue.length);
+                    localStorage.setItem(`queue${index}`, JSON.stringify(queue));
+                
+                    this.currentVisitors += enterGroup.groupsize;
+                    entranceView.renderEnterGroup(enterGroup, index);
+                }
             }
         }
-    } 
+    }
+    
+    tryEnter(group) {
+        let sim_squares = [];
+        if(localStorage.sim_squares !== undefined) {
+            sim_squares = JSON.parse(localStorage.sim_squares);
+        }
+        
+        for (let arr of sim_squares) {
+            let results = arr.filter(l => l.currentVisitors <= (l.maxVisitors - group.groupsize));
+            
+            if (results.length > 0) {
+                results[0].visitors.push(group);
+                results[0].currentVisitors += group.groupsize;
+                console.log(results[0]);
+                localStorage.setItem('sim_squares', JSON.stringify(sim_squares));
+                return true;
+            }
+        }
+
+        return false;
+        
+    }
 
     stopIntervals() {
         for (let interval of this.queueIntervals) {

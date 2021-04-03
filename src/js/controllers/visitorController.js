@@ -5,11 +5,11 @@ export class VisitorController {
         this.visitorModel = new VisitorModel();
     }
 
-    generateVisitorGroup() {
+    async generateVisitorGroup() {
         let newGroupSize = Math.floor(Math.random() * 4) + 1;
         let newGroup = new VisitorGroup(newGroupSize); 
 
-        this.visitorModel.generateInfo(newGroupSize)
+        await this.visitorModel.generateInfo(newGroupSize)
             .then(data => {
                 if (data === undefined) {
                     throw 'Failed to fetch visitor data!';

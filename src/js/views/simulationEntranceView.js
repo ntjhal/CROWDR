@@ -73,7 +73,7 @@ export class SimulationEntranceView {
             for (let j = 0; j < queue[i].groupsize; j++) {
                 ctx.beginPath();
                 ctx.fillStyle = "pink";
-                ctx.arc(75 + i * (queueSpace / 7), (40 - (j * 10)) + (75 * index), circleR, 0, 2 * Math.PI);
+                ctx.arc(75 + i * (queueSpace / 7), (40 - (j * 10)) + (75 * (index-1)), circleR, 0, 2 * Math.PI);
                 ctx.fill();
             }
         }
@@ -86,7 +86,7 @@ export class SimulationEntranceView {
         for (let j = 0; j < group.groupsize; j++) {
             ctx.beginPath();
             ctx.fillStyle = "pink";
-            ctx.arc(20, (40 - (j * 10)) + (75 * index), circleR, 0, 2 * Math.PI);
+            ctx.arc(20, (40 - (j * 10)) + (75 * (index-1)), circleR, 0, 2 * Math.PI);
             ctx.fill();
         }
 
@@ -96,13 +96,13 @@ export class SimulationEntranceView {
     clearQueue(index, clearWidth) {
         let ctx = this.canvas.getContext('2d');
 
-        ctx.clearRect(60, 5 + (75 * index), clearWidth, 50)
+        ctx.clearRect(60, 5 + (75 * (index-1)), clearWidth, 50)
     } 
 
     clearEnterGroup(index, canvas) {
         let ctx = canvas.getContext('2d');
 
-        ctx.clearRect(15, 5 + (75 * index), 15, 50 )
+        ctx.clearRect(15, 5 + (75 * (index-1)), 15, 50 )
     }
 
 
