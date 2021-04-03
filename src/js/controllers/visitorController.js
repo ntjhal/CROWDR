@@ -32,13 +32,9 @@ export class VisitorController {
                 
             })
             .catch(e => {
-                alert(`Error: ${e}`)
+                console.log('Fetch failed');
             });
         
         return newGroup;
-    }
-
-    saveGroup(group) {
-        console.log(group)
     }
 }

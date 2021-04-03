@@ -11,6 +11,7 @@ export class SimulationController {
 
         this.queueIntervals = [];
         this.enterIntervals = [];
+        this.updateIntervals = [];
         
         this.currentVisitors = 0;
         this.maxVisitors = 0;
@@ -19,6 +20,11 @@ export class SimulationController {
     startSimulation(amountOfLines) {
         this.initQueue(amountOfLines);
         this.initField();
+
+        let controller = this;
+        window.onbeforeunload = function () {
+            controller.stopIntervals();
+        }
 
         let queues = [];
         for (let i = 1; i <= amountOfLines; i++) {
@@ -47,6 +53,8 @@ export class SimulationController {
 
             setTimeout(enterInterval, 1500);
         }
+        //interval update field 
+        var interval = setInterval(this.updateField, 200, this.regionController, this.fieldView)
     }
 
     initQueue(amountOfLines) {
@@ -152,7 +160,6 @@ export class SimulationController {
             if (results.length > 0) {
                 results[0].visitors.push(group);
                 results[0].currentVisitors += group.groupsize;
-                console.log(results[0]);
                 localStorage.setItem('sim_squares', JSON.stringify(sim_squares));
                 return true;
             }
@@ -162,12 +169,20 @@ export class SimulationController {
         
     }
 
+    updateField(regionController, fieldView) {
+        let currentID = regionController.simCurrentRegionID;
+        fieldView.updateField(currentID);
+    }
+
     stopIntervals() {
         for (let interval of this.queueIntervals) {
             clearInterval(interval);
         }
         for (let interval of this.enterIntervals) {
             clearTimeout(interval);
+        }
+        for (let interval of this.updateIntervals) {
+            clearInterval(interval);
         }
     }
 
