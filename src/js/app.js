@@ -18,6 +18,7 @@ import { GridView } from './views/gridView.js';
 import { SimulationFieldView } from './views/simulationFieldView.js';
 import { SimulationButtonsView } from './views/simulationButtonsView.js';
 import { SimulationEntranceView } from './views/simulationEntranceView.js';
+import { SimulationController } from './controllers/simulationController.js';
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -46,13 +47,12 @@ weatherBtn.addEventListener('click', (e) => {
 // display a visitor
 const visitorDiv = document.querySelector('#visitor');
 
-const vv = new VisitorView(visitorDiv);
-const vc = new VisitorController(vv);
+const vc = new VisitorController();
 
 const visitorBtn = visitorDiv.querySelector('button')
 
 visitorBtn.addEventListener('click', (e) => {
-    vc.generateVisitor();
+    vc.generateVisitorGroup();
 });
 
 // create a region
@@ -102,11 +102,15 @@ gc.render();
 
 let simulationGrid = document.querySelector('sim_grid');
 const entrance = new SimulationEntranceView();
+
 const field = new SimulationFieldView(simulationGrid, poc);
 field.getObjectsOnGrid = poc.getObjectsOnGrid.bind(poc);
 field.getObject = poc.getObject.bind(poc);
+
 const simButtons = new SimulationButtonsView(field);
 simButtons.setCurrent = rc.setSimRegion.bind(rc);
 simButtons.getRegion = rc.getRegion.bind(rc);
 rc.renderSimBtn = simButtons.render.bind(simButtons);
 rc.drawSimRegions();
+
+let simulationController = new SimulationController(entrance, field, vc, rc, poc);

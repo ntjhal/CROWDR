@@ -144,7 +144,7 @@ input:focus, button:focus {
     padding: 1rem;
 }
 
-#settingspanel, #sim_detailspanel {
+#settingspanel {
     padding: 1em;
     height: 60%;
 }
@@ -246,6 +246,17 @@ input:focus, button:focus {
     border: solid 1px black;
 }
 
+#sim_detailspanel {
+    height: 100%;
+    padding: 1em;
+}
+
+#sim_grid div {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
 .griditem {
     background-color: forestgreen;
     border: 1px solid rgba(0, 0, 0, 0.25);
@@ -267,6 +278,13 @@ input:focus, button:focus {
     cursor: not-allowed;
 }
 
-canvas {
+#entranceCanvas {
     background-color: forestgreen;
+}
+
+.visitorCanvas {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: 0;
+    padding: 0;
 }
