@@ -1,14 +1,6 @@
 describe('Form test', () => {
-    it('Visits the page', () => {
-        // arrange
-        let url = 'http://localhost:5500';
-
-        // act
-        cy.visit(url);
-
-        // assert
-        cy.url().should('include', url);
-        cy.contains('CROWDR');
+    beforeEach(() => {
+        cy.visit('/');
     });
 
     it('Shows the first question', () => {
