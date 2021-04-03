@@ -15,11 +15,14 @@ import { ConfigFormController } from './controllers/configFormController.js';
 
 import { GridController } from './controllers/gridController.js';
 import { GridView } from './views/gridView.js';
+
 import { SimulationFieldView } from './views/simulationFieldView.js';
 import { SimulationButtonsView } from './views/simulationButtonsView.js';
 import { SimulationEntranceView } from './views/simulationEntranceView.js';
 import { SimulationController } from './controllers/simulationController.js';
+import { VisitorModel } from './models/visitorModel.js';
 
+// screen buttons
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
     document.getElementById('create').classList.remove('hidden');
@@ -30,37 +33,13 @@ document.getElementById('simulatemode').onclick = () => {
     document.getElementById('create').classList.add('hidden');
 }
 
-// show weather
-const weatherDiv = document.querySelector('#weather');
-
-const wm = new WeatherModel();
-const wv = new WeatherView(weatherDiv);
-const wc = new WeatherController(wv, wm);
-
-const input = weatherDiv.querySelector('input');
-const weatherBtn = weatherDiv.querySelector('button')
-
-weatherBtn.addEventListener('click', (e) => {
-    wc.getWeather(input.value);
-});
-
-// display a visitor
-const visitorDiv = document.querySelector('#visitor');
-
-const vc = new VisitorController();
-
-const visitorBtn = visitorDiv.querySelector('button')
-
-visitorBtn.addEventListener('click', (e) => {
-    vc.generateVisitorGroup();
-});
-
-// create a region
+// region
 const regionButtons = document.querySelector('#regionbuttons');
 
 const rv = new RegionView(regionButtons);
 const rc = new RegionController(rv);
 const poc = new ParkObjectController(rc);
+
 rv.setParkObjectController(poc);
 rc.drawCreateRegions();
 
@@ -92,14 +71,19 @@ const q9 = new ConfigQuestion('bins', 'How many waste bins?', 'number', {
 cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
-// render the basic grid
+// grid
 const gv = new GridView();
-const gc = new GridController(poc, rv, gv); //parameter = parkobjectcontroller
+const gc = new GridController(poc, rv, gv); // parameter = parkobjectcontroller
 gc.render();
 
+// visitors
+let visitorDiv = document.querySelector('#visitor');
 
-//Simulation
+let visitorModel = new VisitorModel();
+let visitorView = new VisitorView(visitorDiv);
+const vc = new VisitorController(visitorModel, visitorView);
 
+// simulation
 let simulationGrid = document.querySelector('sim_grid');
 const entrance = new SimulationEntranceView();
 
@@ -110,7 +94,22 @@ field.getObject = poc.getObject.bind(poc);
 const simButtons = new SimulationButtonsView(field);
 simButtons.setCurrent = rc.setSimRegion.bind(rc);
 simButtons.getRegion = rc.getRegion.bind(rc);
+
 rc.renderSimBtn = simButtons.render.bind(simButtons);
 rc.drawSimRegions();
 
 let simulationController = new SimulationController(entrance, field, vc, rc, poc);
+
+// weather
+const weatherDiv = document.querySelector('#weather');
+
+const wm = new WeatherModel();
+const wv = new WeatherView(weatherDiv);
+const wc = new WeatherController(wv, wm);
+
+const input = weatherDiv.querySelector('input');
+const weatherBtn = weatherDiv.querySelector('button')
+
+weatherBtn.addEventListener('click', (e) => {
+    wc.getWeather(input.value);
+});

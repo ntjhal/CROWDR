@@ -19,19 +19,19 @@ export class GridController {
     place(viewObjID, dropzone) {
         let grid = document.getElementById('grid');
 
-        //get localstorage object
+        // get localstorage object
         let object = this.parkObjectController.getObject(this.regionController.currentRegionID, viewObjID);
 
         let coords = dropzone.id.replace(/{|}/g, '').split('-');
         let dropX = Number(coords[0]);
         let dropY = Number(coords[1]);
-        //check if item wont flow outside of grid.
+        // check if item wont flow outside of grid.
         if ((dropX + object.width) - 1 > 15)
             return false;
         if ((dropY + object.height) - 1 > 15)
             return false;
 
-        //check if item wont overlap other items.
+        // check if item wont overlap other items.
         for (let x = dropX; x < dropX + object.width; x++) {
             for (let y = dropY; y < dropY + object.height; y++) {
                 if (this.parkObjectController.findObjectOnPos(this.regionController.currentRegionID, x, y) != null ||
@@ -41,16 +41,16 @@ export class GridController {
             }
         }
         
-        //save coordinates in item.
+        // save coordinates in item.
         object.x = dropX;
         object.y = dropY;
 
-        //this.lockGridSquares(object.x, object.y, object)
+        // this.lockGridSquares(object.x, object.y, object)
         this.parkObjectController.updateObject(this.regionController.currentRegionID, object)
 
         this.lockGridSquaresFullGrid(this.parkObjectController.getObjectsOnGrid(this.regionController.currentRegionID))
 
-        //return wether place was succesful or not. 
+        // return wether place was succesful or not. 
         return true;
     }
 

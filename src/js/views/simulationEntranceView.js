@@ -33,7 +33,7 @@ export class SimulationEntranceView {
         this.amountOfLines = document.querySelector('#linesInput').value;
         this.renderEntrance();
 
-        //TODO startsimulation'
+        // TODO startsimulation'
         this.startSimulation(this.amountOfLines);
     }
 

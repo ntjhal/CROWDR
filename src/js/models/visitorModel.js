@@ -1,5 +1,10 @@
 export class VisitorModel {
-    constructor() {
+    async getVisitor() {
+        return fetch("https://randomuser.me/api/")
+        .then(res => res.json())
+        .catch(e => {
+            throw e;
+        });
     }
 
     async generateInfo(groupSize) {
@@ -7,7 +12,7 @@ export class VisitorModel {
             .then(res => res.json())
             .catch(e => {
                 throw e;
-        });
+            });
     }
 }
 
@@ -31,4 +36,3 @@ export class VisitorGroup {
         this.visitors.push(visitor);
     }
 }
-

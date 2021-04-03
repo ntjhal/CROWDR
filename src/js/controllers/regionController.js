@@ -7,7 +7,7 @@ export class RegionController {
     }
 
     createRegion() {
-        //create a terrain, name must be unique
+        // create a terrain, name must be unique
         let regions = this.getRegions();
         let newID;
 
@@ -28,7 +28,7 @@ export class RegionController {
     }
 
     getRegions() {
-        //retrieve terrains from JSON in localstorage
+        // retrieve terrains from JSON in localstorage
         let regions = [];
         
         if(localStorage.regions !== undefined) {
@@ -41,7 +41,7 @@ export class RegionController {
     }
 
     saveRegion(region) {
-        //convert terrains to JSON and store in localStorage
+        // convert terrains to JSON and store in localStorage
         if (region == null)
             return;
         
@@ -69,7 +69,7 @@ export class RegionController {
     getRegion(id) {
         if (id == null)
             return;
-        //Get the terrain using the name
+        // Get the terrain using the name
         let regionsArray = this.getRegions();
 
         return regionsArray.filter(r => r.id === id)[0];

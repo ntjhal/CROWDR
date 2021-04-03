@@ -46,13 +46,13 @@ export class SimulationController {
 
         if (this.queueIntervals != null || this.enterIntervals != null || this.updateIntervals != null)
             this.stopIntervals();
-        //interval add to queue
+        // interval add to queue
         for (let i = 0; i < queues.length; i++) {
             var interval = setInterval(this.addToQueue, 500, i + 1, this);
 
             this.queueIntervals.push(interval);
         }
-        //interval enter parc (acutally a recursive setTimeout function)
+        // interval enter parc (acutally a recursive setTimeout function)
         for (let i = 0; i < queues.length; i++) {
             let enterInterval = () => {
                 this.removeFromQueue(i+1, this.entranceView);
@@ -63,7 +63,7 @@ export class SimulationController {
 
             setTimeout(enterInterval, 1500);
         }
-        //interval update field 
+        // interval update field 
         var interval = setInterval(this.updateField, 200, this.regionController, this.fieldView)
     }
 

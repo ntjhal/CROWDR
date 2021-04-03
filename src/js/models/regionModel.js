@@ -1,16 +1,16 @@
 import { ParkObject } from "./parkObjectModel.js";
 
 export class Region {
-    //name
-    //tents (amount)
-    //foodstands (amount)
-    //drinkstands (amount)
-    //trees ??
-    //toilets (amount)
-    //trashbins (amount)
+    // name
+    // tents (amount)
+    // foodstands (amount)
+    // drinkstands (amount)
+    // trees ??
+    // toilets (amount)
+    // trashbins (amount)
     constructor(id) {
         this.id = id;
-        this.name = `region${id}`; //temp
+        this.name = `region${id}`; // temp
         this.parkObjects = [];
 
         this.handleConfigAnswers();
@@ -37,7 +37,7 @@ export class Region {
     }
 
     generateParkObjects(numberOfTents, numberOfFoodstands, numberOfDrinkstands, numberOfTreesHigh, numberOfTreesWide, numberOfTreesShadow, numberOfToilets, numberOfTrashcans) {
-        //Tents
+        // Tents
         for (let i = 0; i < numberOfTents; i++) {
             let tent = new ParkObject(this.parkObjects.length + 1, 'tent', 'src/images/Tent.png', 3, 3);
             tent.maxVisitors = 0;
@@ -47,7 +47,7 @@ export class Region {
             this.parkObjects.push(tent);
         }
 
-        //Food
+        // Food
         for (let i = 0; i < numberOfFoodstands; i++) {
             let food = new ParkObject(this.parkObjects.length + 1, 'foodstand', 'src/images/Foodstand_3.png', 1, 1);
             food.maxVisitors = 0;
@@ -55,13 +55,13 @@ export class Region {
             this.parkObjects.push(food);
         }
 
-        //Drinks
+        // Drinks
         for (let i = 0; i < numberOfDrinkstands; i++) {
             let drink = new ParkObject(this.parkObjects.length + 1, 'drinkstand', 'src/images/Drinkstand.png', 1, 2);
             this.parkObjects.push(drink);
         }
 
-        //Trees
+        // Trees
         for (let i = 0; i < numberOfTreesHigh; i++) {
             let tree = new ParkObject(this.parkObjects.length + 1, 'tree_high', 'src/images/Tree.png', 1, 1);
             this.parkObjects.push(tree);
@@ -75,13 +75,13 @@ export class Region {
             this.parkObjects.push(tree);
         }
 
-        //Toilets
+        // Toilets
         for (let i = 0; i < numberOfToilets; i++) {
             let toilet = new ParkObject(this.parkObjects.length + 1, 'toiletbuilding', 'src/images/Toiletbuilding.png', 3, 1);
             this.parkObjects.push(toilet);
         }
 
-        //Trashcans
+        // Trashcans
         for (let i = 0; i < numberOfTrashcans; i++) {
             let trashcan = new ParkObject(this.parkObjects.length + 1, 'trashcan', 'src/images/trashcan.png', 1, 1);
             trashcan.capacity = 0;

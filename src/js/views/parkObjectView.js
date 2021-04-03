@@ -3,7 +3,7 @@ export class ParkObjectDetailView {
         this.parkObjectController = controller;
     }
 
-    //TODO verbeteren van deze code, veel dubbele code
+    // TODO verbeteren van deze code, veel dubbele code
     renderDetails(regionID, object) {
         let settingspanel = document.getElementById('settingspanel');
         settingspanel.innerHTML = '<h2>Object details</h2><br>' +

@@ -1,4 +1,3 @@
-import { GridController } from "../controllers/gridController.js";
 import { ParkObjectDetailView } from "./parkObjectView.js";
 
 export class RegionView {
@@ -35,7 +34,7 @@ export class RegionView {
         btn.classList.add("regionbtn");
 
         btn.addEventListener('click', (e) => {
-            //TODO whatever calls are triggered by this button 
+            // TODO whatever calls are triggered by this button 
             document.getElementById('settingspanel').innerHTML = "<h2>Object details</h2>";
 
             this.parkObjectController.regioncontroller.currentRegionID = region.id;
@@ -80,7 +79,7 @@ export class RegionView {
             let typeDiv = document.createElement('div');
             typeDiv.id = `${type}-holder`;
             typeDiv.classList.add('dragelementsholder');
-            //typeDiv.innerHTML = type;
+            // typeDiv.innerHTML = type;
 
             for (let po of region.parkObjects.filter(x => x.type === type)) {
                 let object = document.createElement('div');
