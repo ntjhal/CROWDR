@@ -18,6 +18,7 @@ export class Region {
 
     handleConfigAnswers() {
         let answers = {};
+
         if (localStorage.answers !== undefined) {
             answers = JSON.parse(localStorage.answers);
         }
@@ -33,12 +34,10 @@ export class Region {
             Number(answers['toilet_stalls']),
             Number(answers['bins']),
         );
-        
     }
 
     generateParkObjects(numberOfTents, numberOfFoodstands, numberOfDrinkstands, numberOfTreesHigh, numberOfTreesWide, numberOfTreesShadow, numberOfToilets, numberOfTrashcans) {
         //Tents
-        
         for (let i = 0; i < numberOfTents; i++) {
             let tent = new ParkObject(this.parkObjects.length + 1, 'tent', 'src/images/Tent.png', 3, 3);
             tent.maxVisitors = 0;
@@ -47,6 +46,7 @@ export class Region {
             tent.width = 3; tent.height = 3;
             this.parkObjects.push(tent);
         }
+
         //Food
         for (let i = 0; i < numberOfFoodstands; i++) {
             let food = new ParkObject(this.parkObjects.length + 1, 'foodstand', 'src/images/Foodstand_3.png', 1, 1);
@@ -54,11 +54,13 @@ export class Region {
             food.foodtype = "";
             this.parkObjects.push(food);
         }
+
         //Drinks
         for (let i = 0; i < numberOfDrinkstands; i++) {
             let drink = new ParkObject(this.parkObjects.length + 1, 'drinkstand', 'src/images/Drinkstand.png', 1, 2);
             this.parkObjects.push(drink);
         }
+
         //Trees
         for (let i = 0; i < numberOfTreesHigh; i++) {
             let tree = new ParkObject(this.parkObjects.length + 1, 'tree_high', 'src/images/Tree.png', 1, 1);
@@ -72,11 +74,13 @@ export class Region {
             let tree = new ParkObject(this.parkObjects.length + 1, 'tree_shadows', 'src/images/Tree.png', 3, 3);
             this.parkObjects.push(tree);
         }
+
         //Toilets
         for (let i = 0; i < numberOfToilets; i++) {
             let toilet = new ParkObject(this.parkObjects.length + 1, 'toiletbuilding', 'src/images/Toiletbuilding.png', 3, 1);
             this.parkObjects.push(toilet);
         }
+
         //Trashcans
         for (let i = 0; i < numberOfTrashcans; i++) {
             let trashcan = new ParkObject(this.parkObjects.length + 1, 'trashcan', 'src/images/trashcan.png', 1, 1);
@@ -85,6 +89,4 @@ export class Region {
             this.parkObjects.push(trashcan);
         }
     }
-
-
 }

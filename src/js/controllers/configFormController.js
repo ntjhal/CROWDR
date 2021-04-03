@@ -13,6 +13,9 @@ export class ConfigFormController {
         // render the reset button
         this.view.renderReset();
 
+        // clear the storage
+        localStorage.removeItem('answers');
+
         // show the first question
         this.nextQuestion();
     }
@@ -58,9 +61,8 @@ export class ConfigFormController {
 
         // see if there is any
         if (question == null) {
-            // we are done here
             this.regioncontroller.createRegion();
-            this.regioncontroller.drawRegions();
+            this.regioncontroller.drawCreateRegions();
             this.onReset();
             return;
         }

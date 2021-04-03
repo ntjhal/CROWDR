@@ -3,11 +3,12 @@ import { Region } from "../models/regionModel.js";
 export class RegionController {
     constructor(view) {
         this.regionview = view;
+        this.renderSimBtn = null;
     }
 
     createRegion() {
         //create a terrain, name must be unique
-        let regions = this.getRegions()
+        let regions = this.getRegions();
         let newID;
 
         if(regions.length >= 6) {
@@ -20,6 +21,8 @@ export class RegionController {
 
         let region = new Region(newID);
         this.saveRegion(region);
+
+        this.currentRegionID = region.id;
 
         return region;
     }
@@ -72,7 +75,12 @@ export class RegionController {
         return regionsArray.filter(r => r.id === id)[0];
     }
 
-    drawRegions() {
+    setSimRegion(value) {
+        this.simCurrentRegionID = value;
+        return this.getRegion(this.simCurrentRegionID);
+    }
+
+    drawCreateRegions() {
         let regions = this.getRegions();
         let regionButtons = document.querySelector('#regionbuttons');
         regionButtons.innerHTML = "";
@@ -80,5 +88,23 @@ export class RegionController {
         for(let region of regions) {
             this.regionview.render(region);
         }
+    }
+
+    drawSimRegions() {
+        let regions = this.getRegions();
+        let regionButtons = document.querySelector('#sim_regionbuttons');
+        regionButtons.innerHTML = "";
+        
+        for(let region of regions) {
+            this.renderSimBtn(region);
+        }
+    }
+
+    getCurrentSimRegionID() {
+        return this.simCurrentRegionID;
+    }
+
+    getCurrentRegionID() {
+        return this.currentRegionID;
     }
 }

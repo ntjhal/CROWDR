@@ -14,6 +14,11 @@ import { ConfigFormView } from './views/configFormView.js';
 import { ConfigFormController } from './controllers/configFormController.js';
 
 import { GridController } from './controllers/gridController.js';
+import { GridView } from './views/gridView.js';
+import { SimulationFieldView } from './views/simulationFieldView.js';
+import { SimulationButtonsView } from './views/simulationButtonsView.js';
+import { SimulationEntranceView } from './views/simulationEntranceView.js';
+import { SimulationController } from './controllers/simulationController.js';
 
 document.getElementById('createmode').onclick = () => {
     document.getElementById('simulate').classList.add('hidden');
@@ -24,22 +29,6 @@ document.getElementById('simulatemode').onclick = () => {
     document.getElementById('simulate').classList.remove('hidden');
     document.getElementById('create').classList.add('hidden');
 }
-
-// const canvas = document.querySelector('canvas');
-// const c = canvas.getContext('2d');
-// canvas.width = 750;
-// canvas.height = 750;
-// //One grid position is 50 x 50 
-
-// // draw German flag
-// c.fillStyle = 'black';
-// c.fillRect(10, 10, 480, 100);
-
-// c.fillStyle = 'red';
-// c.fillRect(10, 110, 480, 100);
-
-// c.fillStyle = 'yellow';
-// c.fillRect(10, 210, 480, 100);
 
 // show weather
 const weatherDiv = document.querySelector('#weather');
@@ -58,13 +47,12 @@ weatherBtn.addEventListener('click', (e) => {
 // display a visitor
 const visitorDiv = document.querySelector('#visitor');
 
-const vv = new VisitorView(visitorDiv);
-const vc = new VisitorController(vv);
+const vc = new VisitorController();
 
 const visitorBtn = visitorDiv.querySelector('button')
 
 visitorBtn.addEventListener('click', (e) => {
-    vc.generateVisitor();
+    vc.generateVisitorGroup();
 });
 
 // create a region
@@ -74,7 +62,7 @@ const rv = new RegionView(regionButtons);
 const rc = new RegionController(rv);
 const poc = new ParkObjectController(rc);
 rv.setParkObjectController(poc);
-rc.drawRegions();
+rc.drawCreateRegions();
 
 // configuration form
 const cfm = new ConfigForm();
@@ -105,5 +93,24 @@ cfm.addQuestions([q1, q2, q3, q4, q5, q6, q7, q8, q9]);
 cfc.init();
 
 // render the basic grid
-const gc = new GridController(poc, rv); //parameter = parkobjectcontroller
-gc.init();
+const gv = new GridView();
+const gc = new GridController(poc, rv, gv); //parameter = parkobjectcontroller
+gc.render();
+
+
+//Simulation
+
+let simulationGrid = document.querySelector('sim_grid');
+const entrance = new SimulationEntranceView();
+
+const field = new SimulationFieldView(simulationGrid, poc);
+field.getObjectsOnGrid = poc.getObjectsOnGrid.bind(poc);
+field.getObject = poc.getObject.bind(poc);
+
+const simButtons = new SimulationButtonsView(field);
+simButtons.setCurrent = rc.setSimRegion.bind(rc);
+simButtons.getRegion = rc.getRegion.bind(rc);
+rc.renderSimBtn = simButtons.render.bind(simButtons);
+rc.drawSimRegions();
+
+let simulationController = new SimulationController(entrance, field, vc, rc, poc);

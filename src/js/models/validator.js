@@ -3,6 +3,16 @@ export class Validator {
         this.answers = [];
     }
 
+    min(amount, value) {
+        // check if the given value is smaller than the minimum value
+        if (value < amount) {
+            return new ValidationResult(false, `Value too low, minimum is ${amount}!`);
+        }
+
+        // all checks passed, valid
+        return new ValidationResult();
+    }
+
     max(amount, value) {
         // check if the given value is higher than the maximum value
         if (value > amount) {
@@ -24,12 +34,21 @@ export class Validator {
     }
 
     percentOfSpace(space, percent, value) {
-        const maximum = percent * space;
+        const maximum = Math.floor(Math.abs(percent * space));
 
         if (value > maximum) {
             return new ValidationResult(false, `Value too high, maximum is ${maximum}`);
         }
 
+        // all checks passed, valid
+        return new ValidationResult();
+    }
+    
+    enoughSpaceLeft(space, value) {
+        if (value > space) {
+            return new ValidationResult(false, `Not enough room for this amount of objects. Space left: ${space}`);
+        }
+        
         // all checks passed, valid
         return new ValidationResult();
     }

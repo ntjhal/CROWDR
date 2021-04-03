@@ -118,7 +118,11 @@ input:focus, button:focus {
     justify-content: space-evenly;
 }
 
-#sidepanel {
+.flex-center {
+    justify-content: center;
+}
+
+.sidepanel {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -126,7 +130,7 @@ input:focus, button:focus {
     height: 850px;
 }
 
-#centrepanel {
+.centrepanel {
     width: 750px;
     height: 850px;
     margin: 0 1em;
@@ -203,7 +207,7 @@ input:focus, button:focus {
     height: 100%;
 }
 
-#regionbuttons {
+#regionbuttons, #sim_regionbuttons {
     padding: 0.5em;
     height: 50px;
     width: 60%;
@@ -232,14 +236,25 @@ input:focus, button:focus {
     border-radius: 5px;
 }
 
-#grid {
+#sim_grid, #grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    background-color: white;
+    background-color: forestgreen;
     width: 750px;
     height: 750px;
     margin: 1em 0;
     border: solid 1px black;
+}
+
+#sim_detailspanel {
+    height: 100%;
+    padding: 1em;
+}
+
+#sim_grid div {
+    width: 50px;
+    height: 50px;
+    text-align: center;
 }
 
 .griditem {
@@ -261,4 +276,15 @@ input:focus, button:focus {
 
 .disabled:hover {
     cursor: not-allowed;
+}
+
+#entranceCanvas {
+    background-color: forestgreen;
+}
+
+.visitorCanvas {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    margin: 0;
+    padding: 0;
 }
