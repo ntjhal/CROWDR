@@ -14,6 +14,7 @@ export class SimulationEntranceView {
         input.type = 'number';
         input.min = 0;
         input.value = 3;
+        input.value = 10;
         input.id = 'linesInput'
         input.classList.add('input');
 

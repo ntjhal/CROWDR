@@ -15,11 +15,21 @@ export class SimulationController {
         
         this.currentVisitors = 0;
         this.maxVisitors = 0;
+
+        this.initField();
     }
 
     startSimulation(amountOfLines) {
+        this.currentVisitors = 0;
+
         this.initQueue(amountOfLines);
         this.initField();
+
+        if (this.regionController.simCurrentRegionID !== undefined) {
+            let region = this.regionController.getRegion(this.regionController.simCurrentRegionID);
+            this.fieldView.renderVisitorHolders(region);
+            console.log('render')
+        }
 
         let controller = this;
         window.onbeforeunload = function () {
@@ -34,7 +44,7 @@ export class SimulationController {
         }
 
 
-        if (this.queueIntervals != null || this.enterIntervals != null)
+        if (this.queueIntervals != null || this.enterIntervals != null || this.updateIntervals != null)
             this.stopIntervals();
         //interval add to queue
         for (let i = 0; i < queues.length; i++) {
@@ -64,7 +74,11 @@ export class SimulationController {
         }
     }
 
-    initField() {
+    initField() {        
+        if (localStorage.getItem('sim_squares') !== undefined) {
+            localStorage.removeItem('sim_squares');
+        }
+
         let regions = this.regionController.getRegions(); 
         let sim_squares = [];
         let lockedSquares = [];

@@ -88,6 +88,7 @@ export class SimulationFieldView {
                         this.renderVisitorsDetails(x, y, region.id);
                     })
 
+                    gridsquare.innerHTML = "";
                     gridsquare.append(canvas);
                 }
             }
