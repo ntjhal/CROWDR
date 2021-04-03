@@ -113,4 +113,4 @@ simButtons.getRegion = rc.getRegion.bind(rc);
 rc.renderSimBtn = simButtons.render.bind(simButtons);
 rc.drawSimRegions();
 
-let simulationController = new SimulationController(entrance, field, vc);
+let simulationController = new SimulationController(entrance, field, vc, rc, poc);
