@@ -6,7 +6,8 @@ export class VisitorModel {
     }
     
     async generateInfo(groupSize) {
-        return await Fetcher.get(`https://randomuser.me/api/?results=${groupSize}`);
+        let url = `https://randomuser.me/api/?results=${groupSize}`;
+        return await Fetcher.get(url);
     }
 }
 

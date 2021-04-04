@@ -68,9 +68,11 @@ export class SimulationController {
         var interval1 = setInterval(this.updateField, 200, this.regionController, this.fieldView);
         // interval at visitors to parkobjects
         this.resetCurrentVisitors();
-        var interval2 = setInterval(this.addVisitorsToObjects, 3000, this.regionController, this.parkObjectController);
-        var interval3 = setInterval(this.visitorController.checkList, 20, this.visitorController);
-        this.defaultIntervals.push([interval1, interval2, interval3]);
+        var interval2 = setInterval(this.addVisitorsToObjects, 6000 / amountOfLines, this.regionController, this.parkObjectController);
+
+        this.visitorController.checkList();
+        
+        this.defaultIntervals.push([interval1, interval2]);
 
     }
 
@@ -154,19 +156,22 @@ export class SimulationController {
     }
 
     getData() {
-        let groupSize = Math.floor(Math.random() * 4);
+        let groupSize = Math.floor(Math.random() * 4) + 1;
+
         let group = new VisitorGroup(groupSize);
 
-        if (this.visitorController.visitors.length > groupSize) {
+        let visitors = this.visitorController.visitors;
+        
+        if (visitors.length > groupSize) {
             for (let i = 0; i < groupSize; i++) {
-                let visitor = this.visitorController.visitors.pop();
-                group.visitors.push(visitor);
+                let rand = Math.floor(Math.random() * visitors.length);
+                let visitor = this.visitorController.visitors[rand]
+                group.addVisitor(visitor);
             }
             return group;
         } 
         
-        return null;
-        
+        return null;  
     }
     
     removeFromQueue(index, entranceView) {

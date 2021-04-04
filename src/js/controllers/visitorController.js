@@ -13,9 +13,9 @@ export class VisitorController {
         this.view.onShow = this.getVisitor.bind(this);
     }
 
-    checkList(controller) {
-        if (controller.visitors.length <= 4) {
-            controller.fillVisitorList();
+    checkList() {
+        if (this.visitors.length <= 4) {
+            this.fillVisitorList();
         }
     }
 
@@ -42,6 +42,8 @@ export class VisitorController {
                 if (data === undefined) {
                     throw 'Failed to fetch visitor data!';
                 }
+
+                return data
             })
             .then(v => {                 
                 for (let r of v.results) {
