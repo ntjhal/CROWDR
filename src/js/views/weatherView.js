@@ -4,7 +4,7 @@ export class WeatherView {
     }
 
     render(data) {
-        this.div.querySelector('#city').textContent = `City: ${data.city}`;
+        this.div.querySelector('#weather_city').textContent = `City: ${data.city}`;
         this.div.querySelector('#temp').textContent = `Temperature: ${data.temp} °C`;
 
         let icon = document.createElement('img');
