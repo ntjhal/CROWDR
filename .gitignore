@@ -352,3 +352,4 @@ MigrationBackup/
 dist/
 cypress/screenshots
 cypress/videos
+.env
