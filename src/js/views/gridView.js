@@ -93,9 +93,13 @@ export class GridView {
             }
 
             // check if the placement is valid
-            if (this.placeObj(objectid, dropzone) != false) {
+            let obj = this.placeObj(objectid, dropzone);
+            if (obj != null) {
                 // append the object to the dropzone
                 dropzone?.append(this.dragged);
+                this.dragged.addEventListener('click', (e) => {
+                    this.parkObjectView.renderDetails(region.id, obj);
+                })
             }
         }, false);
     }

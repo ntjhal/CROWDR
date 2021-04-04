@@ -12,7 +12,7 @@ export class SimulationController {
 
         this.queueIntervals = [];
         this.enterIntervals = [];
-        this.updateIntervals = [];
+        this.defaultIntervals = [];
         
         this.currentVisitors = 0;
         this.maxVisitors = 0;
@@ -64,7 +64,12 @@ export class SimulationController {
             setTimeout(enterInterval, 1500);
         }
         // interval update field 
-        var interval = setInterval(this.updateField, 200, this.regionController, this.fieldView)
+        var interval1 = setInterval(this.updateField, 200, this.regionController, this.fieldView);
+        // interval at visitors to parkobjects
+        this.resetCurrentVisitors();
+        var interval2 = setInterval(this.addVisitorsToObjects, 3000, this.regionController, this.parkObjectController);
+        this.defaultIntervals.push([interval1, interval2]);
+
     }
 
     initQueue(amountOfLines) {
@@ -83,6 +88,7 @@ export class SimulationController {
         let sim_squares = [];
         let lockedSquares = [];
 
+        let id = 1;
         for (let region of regions) {
             let squares = [];
             lockedSquares = this.getLockedSquares(region);
@@ -92,8 +98,11 @@ export class SimulationController {
                     
                     if (results.length == 0) {
                         let square = new SimulationSquare(region.id, x, y);
+                        square.id = id;
                         squares.push(square);
                         this.maxVisitors += 7;
+
+                        id++;
                     }   
                 }
             }
@@ -191,6 +200,66 @@ export class SimulationController {
         fieldView.updateField(currentID);
     }
 
+    resetCurrentVisitors() {
+        let regions = this.regionController.getRegions();
+        let objects = []
+
+        for (let region of regions) {
+            for (let obj of this.parkObjectController.getObjectsOnGrid(region.id).filter(o => o.type == "tent" || o.type == "foodstand")) {
+                objects.push(obj);
+            }
+        }
+
+        for (let object of objects) {
+            object.currentVisitors = 0;
+            this.parkObjectController.updateObject(object.regionId, object);
+        }
+    }
+
+    addVisitorsToObjects(regionController, parkObjectController) {
+        let sim_squares = [];
+        let regions = regionController.getRegions();
+        let objects = []
+
+        for (let region of regions) {
+            for (let obj of parkObjectController.getObjectsOnGrid(region.id).filter(o => o.type == "tent" || o.type == "foodstand")) {
+                objects.push(obj);
+            }
+        }
+
+        for (let object of objects) {
+            if(object.maxVisitors > object.currentVisitors) {
+                if (localStorage.sim_squares !== undefined) {
+                    sim_squares = JSON.parse(localStorage.sim_squares);
+                    let filledSquares = [];
+                    for (let arr of sim_squares) {
+                        for (let value of arr.filter(s => s.currentVisitors > 0)) {
+                            filledSquares.push(value);
+                        } 
+                    }
+
+                    if(filledSquares.length > 0) {
+                        let max = filledSquares.length;
+                        let rand = Math.floor(Math.random() * max);
+                        
+                        let square = filledSquares[rand];
+                        let group = square.visitors[0];
+
+                        square.visitors = square.visitors.slice(1, square.visitors.length);
+                        square.currentVisitors -= group.groupsize;
+                        
+                        object.currentVisitors += group.groupsize;
+
+                        sim_squares[object.regionId - 1].filter(i => i.id != square.id);
+                        
+                        parkObjectController.updateObject(object.regionId, object);
+                        localStorage.setItem('sim_squares', JSON.stringify(sim_squares));
+                    }
+                }
+            }
+        }
+    }
+
     stopIntervals() {
         for (let interval of this.queueIntervals) {
             clearInterval(interval);
@@ -198,8 +267,10 @@ export class SimulationController {
         for (let interval of this.enterIntervals) {
             clearTimeout(interval);
         }
-        for (let interval of this.updateIntervals) {
+        for (let interval of this.defaultIntervals) {
             clearInterval(interval);
         }
     }
+
+
 }

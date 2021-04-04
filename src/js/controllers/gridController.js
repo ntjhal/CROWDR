@@ -27,7 +27,7 @@ export class GridController {
         let dropY = Number(coords[1]);
         
         if (!this.checkPlacement(dropX, dropY, object)) {
-            return false;
+            return null;
         }
 
         // save coordinates in item.
@@ -49,7 +49,7 @@ export class GridController {
         SoundController.play('pop');
 
         // return whether place was succesful or not. 
-        return true;
+        return object;
     }
 
     lockGridSquares(lockX, lockY, object) {
