@@ -42,7 +42,7 @@ export class Region {
             let tent = new ParkObject(this.parkObjects.length + 1, 'tent', 'src/images/Tent.png', 3, 3);
             tent.maxVisitors = 0;
             tent.openingtime = '00:00';
-            tent.closingtime = '00:01';
+            tent.closingtime = '23:59';
             tent.width = 3; tent.height = 3;
             this.parkObjects.push(tent);
         }

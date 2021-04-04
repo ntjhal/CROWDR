@@ -91,7 +91,7 @@ export class RegionView {
 
                 let image = document.createElement('img');
                 image.classList.add('dragimg')
-                if(po.imagesrc !== undefined) {  
+                if (po.imagesrc !== undefined) {  
                     image.src = po.imagesrc;
                     typeDiv.style.backgroundImage = `url('${po.imagesrc}')`;
                     typeDiv.style.backgroundSize = `${po.width * 50}px ${po.height * 50}px`

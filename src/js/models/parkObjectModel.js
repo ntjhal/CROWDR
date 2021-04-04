@@ -16,4 +16,3 @@ export class ParkObject extends Placeable{
         this.idname = 'parkobject-'.id; 
     }
 }
-
