@@ -4,12 +4,19 @@ export class VisitorController {
     constructor(model, view) {
         this.model = model;
         this.view = view;
+        this.visitors = [];
 
         this.init();
     }
 
     init() {
         this.view.onShow = this.getVisitor.bind(this);
+    }
+
+    checkList(controller) {
+        if (controller.visitors.length <= 4) {
+            controller.fillVisitorList();
+        }
     }
 
     async getVisitor() {
@@ -29,17 +36,12 @@ export class VisitorController {
             });
     }
 
-    async generateVisitorGroup() {
-        let newGroupSize = Math.floor(Math.random() * 4) + 1;
-        let newGroup = new VisitorGroup(newGroupSize); 
-
-        await this.model.generateInfo(newGroupSize)
+    async fillVisitorList() {
+        await this.model.generateInfo(3000)
             .then(data => {
                 if (data === undefined) {
                     throw 'Failed to fetch visitor data!';
                 }
-
-                return data;
             })
             .then(v => {                 
                 for (let r of v.results) {
@@ -51,13 +53,12 @@ export class VisitorController {
                         r.dob.age,
                     );
                 
-                    newGroup.visitors.push(visitor);
+                    this.visitors.push(visitor);
                 }
             })
             .catch(e => {
-                alert('Failed to fetch visitor data!');
+                console.log('Failed to fetch visitor data!');
+                return null;
             });
-        
-        return newGroup;
     }
 }

@@ -1,4 +1,5 @@
 import { SimulationSquare } from "../models/simulationSquare";
+import { VisitorGroup } from "../models/visitorModel";
 import { SoundController } from "./soundController";
 
 export class SimulationController {
@@ -68,7 +69,8 @@ export class SimulationController {
         // interval at visitors to parkobjects
         this.resetCurrentVisitors();
         var interval2 = setInterval(this.addVisitorsToObjects, 3000, this.regionController, this.parkObjectController);
-        this.defaultIntervals.push([interval1, interval2]);
+        var interval3 = setInterval(this.visitorController.checkList, 20, this.visitorController);
+        this.defaultIntervals.push([interval1, interval2, interval3]);
 
     }
 
@@ -132,7 +134,9 @@ export class SimulationController {
         
         let queue = [];
 
-        controller.getData(controller).then(group => {
+        let group = controller.getData();
+        
+        if(group != null) {
             if (localStorage.getItem(`queue${index}`) !== undefined) {
                 queue = JSON.parse(localStorage.getItem(`queue${index}`));
             }
@@ -146,11 +150,23 @@ export class SimulationController {
                 let r = Math.ceil(Math.random() * 4);
                 SoundController.play(`hello${r}`);
             }
-        });
+        }
     }
 
-    async getData(controller) {
-        return await controller.visitorController.generateVisitorGroup();
+    getData() {
+        let groupSize = Math.floor(Math.random() * 4);
+        let group = new VisitorGroup(groupSize);
+
+        if (this.visitorController.visitors.length > groupSize) {
+            for (let i = 0; i < groupSize; i++) {
+                let visitor = this.visitorController.visitors.pop();
+                group.visitors.push(visitor);
+            }
+            return group;
+        } 
+        
+        return null;
+        
     }
     
     removeFromQueue(index, entranceView) {
