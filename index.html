@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CROWDR</title>
+
+    <link rel="stylesheet" href="src/css/app.css">
+    <link rel="shortcut icon" href="src/images/users-solid.svg" type="image/svg+xml">
+
+    <script type="module" src="dist/bundle.js"></script>
+</head>
+<body>
+    <h1>CROWDR</h1>
+
+    <div id="modebar">
+        <button id="createmode">Create</button>
+        <button id="simulatemode">Simulate</button>
+    </div>
+
+    <div id="main">
+        <div id='create'>
+            <div class="flex space-evenly">
+                <div class="sidepanel">
+                    <div id="configForm" class="holder">
+                        <h2>Configuration</h2>
+                        <form name="configuration"></form>
+                    </div>
+        
+                    <div id="dragelements" class="holder"></div>
+                </div>
+
+                <div class="centrepanel">
+                    <div id="regioninfo" class="holder flex space-between">
+                        <div id="regionbuttons"></div>
+                    </div>
+                    
+                    <div id="grid"></div>
+                </div>
+
+                <div class="sidepanel">
+                    <div id="settingspanel" class="holder">
+                        <h2>Object details</h2>
+                    </div>
+
+                    <div id="extra" class="holder">
+                        <div id="visitor">
+                            <h2>Visitor</h2>
+                    
+                            <button type="button">Show new</button>
+                    
+                            <p id="name"></p>
+                            <p id="gender"></p>
+                            <p id="city"></p>
+                        </div>
+
+                        <div id="weather">
+                            <div>
+                                <h2>Weather</h2>
+                                <div class="field horizontal">
+                                    <input type="text">
+                                    <button type="button">Toon</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p id="weather_city"></p>
+                                <p id="temp"></p>
+                                <div id="icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="simulate" class="hidden">
+            <div class="flex flex-center">
+                <div class="sidepanel">
+                    <div id="entrance" class="holder">
+                        <h2>Entrance</h2>
+                        <div class="flex flex-center">
+                            <canvas id="entranceCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="centrepanel">
+                    <div id="sim_regioninfo" class="holder flex space-between">
+                        <div id="sim_regionbuttons"></div>
+                    </div>
+                    <div id="sim_grid"></div>
+                </div>
+
+                <div class="sidepanel">
+                    <div id="sim_detailspanel" class="holder">
+                        <h2>Details</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

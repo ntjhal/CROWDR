@@ -1,0 +1,28 @@
+{
+  "name": "crowdr",
+  "version": "1.0.0",
+  "description": "JavaScript CROWDR web-application.",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "cypress:open": "cypress open",
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntjhal/CROWDR.git"
+  },
+  "keywords": [],
+  "author": "matsn0w & ntjhal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntjhal/CROWDR/issues"
+  },
+  "homepage": "https://github.com/ntjhal/CROWDR#readme",
+  "devDependencies": {
+    "webpack": "^5.29.0",
+    "webpack-cli": "^4.6.0",
+    "cypress": "^6.8.0",
+    "dotenv": "^8.2.0"
+  }
+}
