@@ -1,4 +1,5 @@
 import { SimulationSquare } from "../models/simulationSquare";
+import { SoundController } from "./soundController";
 
 export class SimulationController {
     constructor(entrance, field, visitorController, regionController, parkObjectController) {
@@ -131,7 +132,11 @@ export class SimulationController {
                 queue.push(group);
                 localStorage.setItem(`queue${index}`, JSON.stringify(queue));
                 controller.entranceView.renderQueue(queue, index)
-            } 
+
+                // play random 'hello' sound
+                let r = Math.ceil(Math.random() * 4);
+                SoundController.play(`hello${r}`);
+            }
         });
     }
 
@@ -139,9 +144,7 @@ export class SimulationController {
         return await controller.visitorController.generateVisitorGroup();
     }
     
-
     removeFromQueue(index, entranceView) {
-        
         let queue = [];
         if (localStorage.getItem(`queue${index}`) !== undefined) {
             queue = JSON.parse(localStorage.getItem(`queue${index}`));
@@ -164,6 +167,7 @@ export class SimulationController {
     
     tryEnter(group) {
         let sim_squares = [];
+
         if (localStorage.sim_squares !== undefined) {
             sim_squares = JSON.parse(localStorage.sim_squares);
         }
@@ -180,7 +184,6 @@ export class SimulationController {
         }
 
         return false;
-        
     }
 
     updateField(regionController, fieldView) {
