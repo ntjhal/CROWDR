@@ -1,3 +1,5 @@
+import { AnimationController } from "../controllers/animationController.js";
+
 export class GridView {
     constructor() {
         this.lockSquares = null;
@@ -38,6 +40,9 @@ export class GridView {
 
         document.addEventListener("dragend", (event) => {
             event.target.style.opacity = "";
+
+            // play animation
+            AnimationController.drop(this.dragged);
         }, false);
 
         document.addEventListener("dragover", (event) => {
@@ -93,10 +98,12 @@ export class GridView {
             }
 
             // check if the placement is valid
-            if (this.placeObj(objectid, dropzone) != false) {
-                // append the object to the dropzone
-                dropzone?.append(this.dragged);
+            if (this.placeObj(objectid, dropzone) == false) {
+                return;
             }
+
+            // append the object to the dropzone
+            dropzone?.append(this.dragged);
         }, false);
     }
 }
