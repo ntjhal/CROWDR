@@ -31,9 +31,14 @@ export class SimulationEntranceView {
 
     onStart() {
         this.amountOfLines = document.querySelector('#linesInput').value;
+
+        if (this.amountOfLines > 10) {
+            alert('Max. 10 lines!');
+            return;
+        }
+
         this.renderEntrance();
 
-        // TODO startsimulation'
         this.startSimulation(this.amountOfLines);
     }
 
