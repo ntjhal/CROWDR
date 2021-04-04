@@ -1,18 +1,12 @@
+import { Fetcher } from "./fetcher.js";
+
 export class VisitorModel {
     async getVisitor() {
-        return fetch("https://randomuser.me/api/")
-        .then(res => res.json())
-        .catch(e => {
-            throw e;
-        });
+        return await Fetcher.get('https://randomuser.me/api/');
     }
-
+    
     async generateInfo(groupSize) {
-        return fetch("https://randomuser.me/api/?results="+groupSize)
-            .then(res => res.json())
-            .catch(e => {
-                throw e;
-            });
+        return await Fetcher.get(`https://randomuser.me/api/?results=${groupSize}`);
     }
 }
 

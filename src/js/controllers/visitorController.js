@@ -25,7 +25,7 @@ export class VisitorController {
                 this.view.render(v.results[0]);
             })
             .catch(e => {
-                alert('Failed to fetch visitor data!');
+                alert(e);
             });
     }
 

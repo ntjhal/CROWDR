@@ -28,7 +28,6 @@ export class SimulationController {
         if (this.regionController.simCurrentRegionID !== undefined) {
             let region = this.regionController.getRegion(this.regionController.simCurrentRegionID);
             this.fieldView.renderVisitorHolders(region);
-            console.log('render')
         }
 
         let controller = this;
@@ -127,6 +126,7 @@ export class SimulationController {
             if (localStorage.getItem(`queue${index}`) !== undefined) {
                 queue = JSON.parse(localStorage.getItem(`queue${index}`));
             }
+            
             if (queue.length < groupPerLine) {
                 queue.push(group);
                 localStorage.setItem(`queue${index}`, JSON.stringify(queue));
