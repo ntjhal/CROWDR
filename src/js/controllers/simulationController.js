@@ -38,7 +38,7 @@ export class SimulationController {
 
         let queues = [];
         for (let i = 1; i <= amountOfLines; i++) {
-            if(localStorage.getItem(`queue${i}`) != null) {
+            if (localStorage.getItem(`queue${i}`) != null) {
                 queues.push(JSON.parse(localStorage.getItem(`queue${i}`)));
             }
         }
@@ -151,7 +151,7 @@ export class SimulationController {
 
         if (enterGroup != null) {
             if ((this.currentVisitors + enterGroup.groupsize) < this.maxVisitors) {
-                if(this.tryEnter(enterGroup) == true) {
+                if (this.tryEnter(enterGroup) == true) {
                     queue = queue.slice(1, queue.length);
                     localStorage.setItem(`queue${index}`, JSON.stringify(queue));
                 
@@ -164,7 +164,7 @@ export class SimulationController {
     
     tryEnter(group) {
         let sim_squares = [];
-        if(localStorage.sim_squares !== undefined) {
+        if (localStorage.sim_squares !== undefined) {
             sim_squares = JSON.parse(localStorage.sim_squares);
         }
         
@@ -199,8 +199,4 @@ export class SimulationController {
             clearInterval(interval);
         }
     }
-
-
-
-
 }

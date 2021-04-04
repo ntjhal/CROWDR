@@ -42,7 +42,7 @@ export class VisitorController {
                 return data;
             })
             .then(v => {                 
-                for(let r of v.results) {
+                for (let r of v.results) {
                     let visitor = new Visitor(
                         r.name.first,
                         r.name.last,

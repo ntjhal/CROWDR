@@ -12,6 +12,7 @@ export class Region {
         this.id = id;
         this.name = `region${id}`; // temp
         this.parkObjects = [];
+        this.locked = false;
 
         this.handleConfigAnswers();
     }

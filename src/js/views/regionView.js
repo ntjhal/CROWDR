@@ -5,22 +5,7 @@ export class RegionView {
         this.div = div;
         this.gridRender = null;
         this.lockGridItems = null;
-
-        this.init();
-    }
-
-    init() {
-        // render a 'lock' button
-        let lock = document.createElement('button');
-        lock.textContent = 'Lock';
-        lock.addEventListener('click', (e) => {
-            this.lock();
-            lock.disabled = true;
-            lock.classList.add('disabled');
-        });
-
-        let infoDiv = document.querySelector('#regioninfo');
-        infoDiv.appendChild(lock);
+        this.onLock = null;
     }
 
     setParkObjectController(poc) {
@@ -29,12 +14,13 @@ export class RegionView {
     }
 
     render(region) {
+        // create a button
         let btn = document.createElement('button');
         btn.innerHTML = region.name;
         btn.classList.add("regionbtn");
 
+        // listen for clicks
         btn.addEventListener('click', (e) => {
-            // TODO whatever calls are triggered by this button 
             document.getElementById('settingspanel').innerHTML = "<h2>Object details</h2>";
 
             this.parkObjectController.regioncontroller.currentRegionID = region.id;
@@ -42,12 +28,45 @@ export class RegionView {
             this.gridRender();
             this.renderParkObjectsInGrid(this.parkObjectController.getObjectsOnGrid(region.id))
             this.lockGridItems();
+            this.renderLockButton();
+
+            // check if the region is locked
+            if (region.locked) {
+                this.toggleLock();
+            }
         });
 
         this.div.appendChild(btn);
     }
 
+    renderLockButton() {
+        let lock = document.createElement('button');
+        lock.textContent = 'Lock';
+        lock.id = 'lock';
+        lock.addEventListener('click', (e) => {
+            this.toggleLock();
+        });
+
+        let infoDiv = document.querySelector('#regioninfo');
+        let lockbtn = infoDiv.querySelector('#lock');
+
+        if (lockbtn != null) {
+            infoDiv.removeChild(lockbtn);
+        }
+
+        infoDiv.appendChild(lock);
+    }
+
+    toggleLock() {
+        this.lock();
+        lock.disabled = !this.lock.disabled;
+        lock.classList.toggle('disabled');
+    }
+
     lock() {
+        this.onLock();
+
+        // get all items on the grid and elements on the stack
         let items = document.querySelectorAll('#grid .griditem');
         let elements = document.querySelector('#dragelements');
 
@@ -69,19 +88,24 @@ export class RegionView {
     }
 
     renderParkObjects(region) {
+        // clear the stack
         let dragelements = document.getElementById('dragelements');
         dragelements.innerHTML = "";
 
+        // get all different object types
         const typeArray = region.parkObjects.map(x => x.type);
         let uniqueTypes = typeArray.filter((item, i, ar) => ar.indexOf(item) === i);
 
+        // loop through all different object types
         for (let type of uniqueTypes) {
+            // create a holder
             let typeDiv = document.createElement('div');
             typeDiv.id = `${type}-holder`;
             typeDiv.classList.add('dragelementsholder');
-            // typeDiv.innerHTML = type;
 
+            // loop through all objects of the current type
             for (let po of region.parkObjects.filter(x => x.type === type)) {
+                // create an object
                 let object = document.createElement('div');
                 object.id = `${po.type}-${po.id}`;
                 object.classList.add('dragelement');
@@ -89,26 +113,30 @@ export class RegionView {
                 object.style.height = `${po.height * 50}px`;
                 object.draggable = true;
 
+                // add an image
                 let image = document.createElement('img');
                 image.classList.add('dragimg')
+                image.draggable = false;
+
                 if (po.imagesrc !== undefined) {  
                     image.src = po.imagesrc;
                     typeDiv.style.backgroundImage = `url('${po.imagesrc}')`;
                     typeDiv.style.backgroundSize = `${po.width * 50}px ${po.height * 50}px`
                     typeDiv.classList.add('typeDiv');
                 }
-                
-                image.draggable = false;
 
+                // listen for clicks on the object
                 object.addEventListener('click', (e) => {
                     this.parkObjectView.renderDetails(region.id, po);
                 })
             
+                // add the object to the holder
                 object.appendChild(image);
                 typeDiv.appendChild(object);
                 typeDiv.classList.add('droppable')
             }
 
+            // add the holders to the stack
             dragelements.appendChild(typeDiv);
         }
     }
@@ -116,6 +144,7 @@ export class RegionView {
     renderParkObjectsInGrid(objectsInGrid) {
         let grid = document.getElementById('grid');
 
+        // loop through all objects on the grid
         for (let obj of objectsInGrid) {
             let griditem = grid.querySelector(`div[id="{${obj.x}-${obj.y}}"]`);
             let dragitem = document.getElementById(`${obj.type}-${obj.id}`);

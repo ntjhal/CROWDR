@@ -9,8 +9,8 @@ export class SimulationFieldView {
         let grid = document.getElementById('sim_grid');
         grid.innerHTML = "";
 
-        for(let y = 1; y <= 15; y++) {
-            for(let x = 1; x <= 15; x++) {
+        for (let y = 1; y <= 15; y++) {
+            for (let x = 1; x <= 15; x++) {
                 let element = document.createElement('div');
                 element.id = `{${x}-${y}}-sim`;
 
@@ -37,7 +37,7 @@ export class SimulationFieldView {
 
             let image = document.createElement('img');
             image.classList.add('dragimg')
-            if(po.imagesrc !== undefined) {  
+            if (po.imagesrc !== undefined) {  
                 image.src = po.imagesrc;
             }
             image.draggable = false;
@@ -59,7 +59,7 @@ export class SimulationFieldView {
         detailspanel.innerHTML = "<h2>Details</h2><br>";
 
         for (let property in object) {
-            if(property != "imagesrc" && property != "x" && property != "y") 
+            if (property != "imagesrc" && property != "x" && property != "y") 
                 detailspanel.innerHTML = detailspanel.innerHTML + `<p><strong>${property}:</strong> ${object[property]}</p>`
         }
     }

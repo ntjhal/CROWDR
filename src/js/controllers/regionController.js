@@ -4,6 +4,8 @@ export class RegionController {
     constructor(view) {
         this.regionview = view;
         this.renderSimBtn = null;
+
+        this.regionview.onLock = this.lock.bind(this);
     }
 
     createRegion() {
@@ -11,9 +13,9 @@ export class RegionController {
         let regions = this.getRegions();
         let newID;
 
-        if(regions.length >= 6) {
+        if (regions.length >= 6) {
             return null;
-        } else if(regions.length > 0) {
+        } else if (regions.length > 0) {
             newID = Math.max.apply(Math, regions.map(function(r) { return r.id; })) + 1;
         } else {
             newID = 1;
@@ -31,7 +33,7 @@ export class RegionController {
         // retrieve terrains from JSON in localstorage
         let regions = [];
         
-        if(localStorage.regions !== undefined) {
+        if (localStorage.regions !== undefined) {
             regions = JSON.parse(localStorage.regions)
         }
 
@@ -46,18 +48,18 @@ export class RegionController {
             return;
         
         let regions = this.getRegions();
-
         regions = regions.filter(r => r.id !== region.id);
-        
         regions.push(region);
 
         function compare(a, b) {
             if (a.id < b.id) {
                 return -1;
             }
+
             if (a.id > b.id) {
                 return 1;
             }
+
             return 0;
         }
 
@@ -69,6 +71,7 @@ export class RegionController {
     getRegion(id) {
         if (id == null)
             return;
+
         // Get the terrain using the name
         let regionsArray = this.getRegions();
 
@@ -85,7 +88,7 @@ export class RegionController {
         let regionButtons = document.querySelector('#regionbuttons');
         regionButtons.innerHTML = "";
         
-        for(let region of regions) {
+        for (let region of regions) {
             this.regionview.render(region);
         }
     }
@@ -95,7 +98,7 @@ export class RegionController {
         let regionButtons = document.querySelector('#sim_regionbuttons');
         regionButtons.innerHTML = "";
         
-        for(let region of regions) {
+        for (let region of regions) {
             this.renderSimBtn(region);
         }
     }
@@ -106,5 +109,11 @@ export class RegionController {
 
     getCurrentRegionID() {
         return this.currentRegionID;
+    }
+
+    lock() {
+        let region = this.getRegion(this.getCurrentRegionID());
+        region.locked = true;
+        this.saveRegion(region);
     }
 }
