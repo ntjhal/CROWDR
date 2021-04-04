@@ -1,3 +1,5 @@
+import { SoundController } from "./soundController";
+
 export class GridController {
     constructor(parkObjectController, regionView, gridView) {
         this.parkObjectController = parkObjectController;
@@ -42,6 +44,9 @@ export class GridController {
         this.parkObjectController.updateObject(this.regionController.currentRegionID, object);
 
         this.lockGridSquaresFullGrid(this.parkObjectController.getObjectsOnGrid(this.regionController.currentRegionID));
+
+        // play pop sound
+        SoundController.play('pop');
 
         // return whether place was succesful or not. 
         return true;
