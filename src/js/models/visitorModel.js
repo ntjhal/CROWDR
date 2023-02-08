@@ -12,8 +12,8 @@ export class VisitorModel {
 }
 
 export class Visitor {
-    constructor(firstname, lastname, gender, hometown, age) {
-        this.firstname = firstname;
+    constructor(username, lastname, gender, hometown, age) {
+        this.username = username;
         this.lastname = lastname;
         this.gender = gender;
         this.hometown = hometown;
